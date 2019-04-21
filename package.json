@@ -1,0 +1,34 @@
+{
+  "name": "betwixt",
+  "version": "1.0.0",
+  "description": "Mapping App that provides a mid-point for people to meet at",
+  "main": "server.js",
+  "scripts": {
+    "client-install": "npm install --prefix client",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ukgt/betwixt.git"
+  },
+  "author": "Mila",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ukgt/betwixt/issues"
+  },
+  "homepage": "https://github.com/ukgt/betwixt#readme",
+  "dependencies": {
+    "antd": "^3.16.3",
+    "body-parser": "^1.18.3",
+    "concurrently": "^4.1.0",
+    "dotenv": "^7.0.0",
+    "express": "^4.16.4",
+    "mongoose": "^5.5.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.11"
+  }
+}
