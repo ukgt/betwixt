@@ -31,10 +31,10 @@ function NavBar(props) {
           <Typography variant="h6" color="inherit" className={classes.grow}>
             Between
           </Typography>
-          <Typography variant="h6" color="inherit">Shaun</Typography>
-          <Button color="inherit">Sign Out</Button>
+          {/* <Typography variant="h6" color="inherit">Shaun</Typography> */}
+          <Button color="inherit">Sign Up/Login</Button>
           <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
-            <AccountCircle />
+            {/* <AccountCircle /> */}
           </IconButton>
         </Toolbar>
       </AppBar>
