@@ -13,7 +13,7 @@ import Footer from "./components/Footer";
 import NavBar from "./components/NavBar";
 import Callback from "./Callback";
 import SecuredRoute from "./components/SecuredRoute/SecuredRoute";
-
+import NewQuestion from "./components/NewQuestion/NewQuestion";
 import auth0Client from "./Auth";
 
 // CSS
@@ -50,11 +50,11 @@ class App extends Component {
             <Route path="/" exact component={Home} />
             <Route path="/map" component={Maps} />
             <Route exact path="/callback" component={Callback} />
-            {/* <SecuredRoute
+            <SecuredRoute
               path="/new-question"
               component={NewQuestion}
               checkingSession={this.state.checkingSession}
-            /> */}
+            />
             <Footer />
           </div>
         </div>
