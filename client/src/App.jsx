@@ -8,7 +8,7 @@ import Footer from "./components/Footer";
 import NavBar from "./components/NavBar";
 
 // CSS
-import "./App.css";
+// import "./App.css";
 
 class App extends Component {
   render() {
