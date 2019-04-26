@@ -64,7 +64,7 @@ class App extends Component {
         username: this.state.username,
         message: this.state.text,
       };
-      axios.post("/message", payload);
+      axios.post("http://localhost:3000/message", payload);
     } else {
       this.setState({ text: e.target.value });
     }
@@ -75,6 +75,7 @@ class App extends Component {
       <Router>
         <div className="root">
           <NavBar />
+         
           <div className="main">
             <Route path="/" exact component={Home} />
             <Route path="/map" component={Maps} />
@@ -84,7 +85,7 @@ class App extends Component {
               component={NewQuestion}
               checkingSession={this.state.checkingSession}
             />
-            <section>
+             <section>
               <ChatList chats={this.state.chats} />
               <ChatBox
                 text={this.state.text}
