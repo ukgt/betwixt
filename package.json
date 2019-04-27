@@ -1,7 +1,7 @@
 {
   "name": "betwixt",
   "version": "1.0.0",
-  "description": "Mapping App that provides a mid-point for people to meet at",
+  "description": "Mapping App that provides mid-point distance and points of interest",
   "main": "server.js",
   "scripts": {
     "client-install": "npm install --prefix client",
@@ -24,11 +24,19 @@
     "antd": "^3.16.3",
     "body-parser": "^1.18.3",
     "concurrently": "^4.1.0",
+    "cors": "^2.8.5",
     "dotenv": "^7.0.0",
     "express": "^4.16.4",
-    "mongoose": "^5.5.2"
+    "express-jwt": "^5.3.1",
+    "helmet": "^3.16.0",
+    "jwks-rsa": "^1.4.0",
+    "mongoose": "^5.5.2",
+    "morgan": "^1.9.1",
+    "pusher": "^2.2.0"
   },
   "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-plugin-react": "^7.12.4",
     "nodemon": "^1.18.11"
   }
 }
