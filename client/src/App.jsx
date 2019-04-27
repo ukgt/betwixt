@@ -56,7 +56,7 @@ class App extends Component {
         </MuiThemeProvider>
       </Router>
     );
-  }
+  };
 }
 
-export default App;
+export default App
