@@ -48,6 +48,7 @@ class App extends Component {
           <NavBar />
           <div className="main">
             <Route path="/" exact component={Home} />
+            <Route path="/callback" exact component={Callback} />
             {/* <Route path="/map" component={Maps} />
             <Route exact path="/callback" component={Callback} /> */}
             {/* <SecuredRoute
