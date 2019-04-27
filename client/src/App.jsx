@@ -122,6 +122,6 @@ switch (this.props.location) {
   }
 }
 
-export default App
+export default App;
 
 // export default withRouter(App);
