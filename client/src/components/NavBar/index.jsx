@@ -14,7 +14,6 @@ import auth0Client from "../../Auth";
 const styles = {
   root: {
     flexGrow: 1,
-    marginBottom: 20
   },
   grow: {
     flexGrow: 1,

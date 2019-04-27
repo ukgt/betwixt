@@ -1,28 +1,43 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Fab from '@material-ui/core/Fab';
-import IconButton from '@material-ui/core/IconButton';
-import AddIcon from '@material-ui/icons/Add';
-import DeleteIcon from '@material-ui/icons/Delete';
-import NavigationIcon from '@material-ui/icons/Navigation';
+import React from "react";
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+import { Link } from "react-router-dom";
 
 const styles = theme => ({
-    margin: {
-      margin: theme.spacing.unit,
-    },
-    extendedIcon: {
-      marginRight: theme.spacing.unit,
-    },
-  });
-
-  function FormButton (props) {
-    const { classes } = props;
-
-    return(
-        <Button size="large" className={classes.margin}>
-          Large
-        </Button>
-    )
+  root: {
+    paddingLeft: 100,
+    paddingRight: 100,
+    paddingTop: 10,
+    paddingBottom: 10
+  },
+  row: {
+    display: "flex",
+    justifyContent: "center",
   }
+});
+
+function FormButton(props) {
+  const { classes } = props;
+
+  return (
+    <div className={classes.row}>
+      <Button
+        variant="contained"
+        size="large"
+        color="primary"
+        className={classes.root}
+        component={Link}
+        to={props.to}
+      >
+        {props.name}
+      </Button>
+    </div>
+  );
+}
+
+FormButton.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
+export default withStyles(styles)(FormButton);
