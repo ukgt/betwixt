@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import Main from './components/Main';
+import Secret from './components/Secret';
 import MapContainer from "./containers/MapContainer";
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
 import Home from "./pages/Home/index";
@@ -6,34 +8,37 @@ import Maps from "./pages/Maps";
 import SignIn from "./pages/SignIn";
 import Footer from "./components/Footer";
 import NavBar from "./components/NavBar";
-
+import NotFound from "./components/NotFound";
 // CSS
 import "./App.css";
 
 class App extends Component {
   render() {
-    let maincomponent=""
+       let mainComponent = "";
       switch (this.props.location) {
         case "":
-        maincomponent=<Main />;
+        mainComponent=<Main />;
         break;
         case "secret":
-        maincomponent=<Secret />;
+        mainComponent=<Secret />;
         break;
-        default:
-        maincomponent=<Main />;
+        default: 
+        mainComponent=<NotFound />;
       }
     return (
-      <Router>
-      <div className="root">
-        <NavBar />
-        <div className="main">
-          <Route path="/" exact component={Home} />
-          <Route path="/map" component={Maps} />
-          <Footer />
-        </div>
+      <div>
+  <Router>
+    <div className='root'>
+      <NavBar />
+      <div className='main'>
+        <Route path='/' exact component={Home} />
+        <Route path='/map' component={Maps} />
+        <Footer />
       </div>
-    </Router>
+    </div>
+  </Router>
+</div>
+
     );
   }
 }
