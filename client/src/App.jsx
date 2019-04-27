@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import Main from './components/Main'
+import Secret from './components/Secret'
 import MapContainer from "./containers/MapContainer";
 import {
   BrowserRouter as Router,
@@ -11,7 +13,8 @@ import Maps from "./pages/Maps";
 import SignIn from "./pages/SignIn";
 import Footer from "./components/Footer";
 import NavBar from "./components/NavBar";
-import Callback from "./Callback";
+import NotFound from './components/NotFound'
+import Callback from './components/Callback'
 import SecuredRoute from "./components/SecuredRoute/SecuredRoute";
 import NewQuestion from "./components/NewQuestion/NewQuestion";
 import auth0Client from "./Auth";
@@ -71,12 +74,30 @@ class App extends Component {
   }
 
   render() {
+    let mainComponent = ''
+switch (this.props.location) {
+  case '':
+    mainComponent = <Main {...this.props} />
+    break
+  case 'callback':
+    mainComponent = <Callback />
+    break
+  case 'secret':
+    mainComponent = <Secret />
+    break
+  default:
+    mainComponent = <NotFound />
+}
+
     return (
-      <Router>
+      
+
+      // <Router>
         <div className="root">
           <NavBar />
-         
-          <div className="main">
+         {mainComponent}
+
+          {/* <div className="main">
             <Route path="/" exact component={Home} />
             <Route path="/map" component={Maps} />
             <Route exact path="/message" component={Callback} />
@@ -94,11 +115,13 @@ class App extends Component {
               />
             </section>
             <Footer />
-          </div>
+          </div> */}
         </div>
-      </Router>
+      // </Router>
     );
   }
 }
 
-export default withRouter(App);
+export default App
+
+// export default withRouter(App);
