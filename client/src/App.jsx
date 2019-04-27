@@ -9,6 +9,7 @@ import SignIn from "./pages/SignIn";
 import Footer from "./components/Footer";
 import NavBar from "./components/NavBar";
 import NotFound from "./components/NotFound";
+import Callback from './components/Callback';
 // CSS
 import "./App.css";
 
@@ -17,7 +18,10 @@ class App extends Component {
        let mainComponent = "";
       switch (this.props.location) {
         case "":
-        mainComponent=<Main />;
+        mainComponent=<Main {...this.props}/>;
+        break;
+         case "callback":
+        mainComponent=<Callback />;
         break;
         case "secret":
         mainComponent=<Secret />;
@@ -26,19 +30,11 @@ class App extends Component {
         mainComponent=<NotFound />;
       }
     return (
-      <div>
-  <Router>
-    <div className='root'>
-      <NavBar />
-      <div className='main'>
-        <Route path='/' exact component={Home} />
-        <Route path='/map' component={Maps} />
-        <Footer />
-      </div>
-    </div>
-  </Router>
-</div>
+<div> 
+  <NavBar />
 
+{mainComponent}
+</div>
     );
   }
 }

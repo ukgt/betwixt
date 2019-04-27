@@ -11,7 +11,7 @@ window.setState= (changes) =>{
 }
 
 let initialState ={
-  name: "Jim",  
+  name: "John",  
   location: window.location.pathname.replace(/^\/?|\/$/g, "")
 };
 window.setState(initialState); 

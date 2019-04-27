@@ -5,14 +5,14 @@ import Home from "./../pages/Home/index";
 import Maps from "./../pages/Maps";
 // import SignIn from "./../pages/SignIn";
 import Footer from "./Footer";
-import NavBar from "./NavBar";
+// import NavBar from "./NavBar";
 export default class Main extends Component {
 render(){
     return(
         <div>
 <Router>
       <div className="root">
-        <NavBar />
+      {/* {this.props.name} */}
         <div className="main">
           <Route path="/" exact component={Home} />
           <Route path="/map" component={Maps} />
