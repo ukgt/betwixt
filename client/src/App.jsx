@@ -48,13 +48,13 @@ class App extends Component {
           <NavBar />
           <div className="main">
             <Route path="/" exact component={Home} />
-            <Route path="/map" component={Maps} />
-            <Route exact path="/callback" component={Callback} />
-            <SecuredRoute
+            {/* <Route path="/map" component={Maps} />
+            <Route exact path="/callback" component={Callback} /> */}
+            {/* <SecuredRoute
               path="/new-question"
               component={NewQuestion}
               checkingSession={this.state.checkingSession}
-            />
+            /> */}
             <Footer />
           </div>
         </div>
