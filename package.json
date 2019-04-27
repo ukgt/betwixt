@@ -31,7 +31,9 @@
     "helmet": "^3.16.0",
     "jwks-rsa": "^1.4.0",
     "mongoose": "^5.5.2",
-    "morgan": "^1.9.1"
+    "morgan": "^1.9.1",
+    "pusher": "^2.2.0",
+    "pusher-js": "^4.4.0"
   },
   "devDependencies": {
     "nodemon": "^1.18.11"

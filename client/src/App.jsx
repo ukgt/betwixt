@@ -4,7 +4,7 @@ import {
   BrowserRouter as Router,
   Route,
   Link,
-  withRouter,
+  withRouter
 } from "react-router-dom";
 import Home from "./pages/Home/index";
 import Maps from "./pages/Maps";
@@ -15,7 +15,10 @@ import Callback from "./Callback";
 import SecuredRoute from "./components/SecuredRoute/SecuredRoute";
 import NewQuestion from "./components/NewQuestion/NewQuestion";
 import auth0Client from "./Auth";
-
+import Pusher from "pusher-js";
+import ChatList from "./ChatList";
+import ChatBox from "./ChatBox";
+import axios from "axios";
 // CSS
 // import "./App.css";
 
@@ -24,22 +27,46 @@ class App extends Component {
     super(props);
     this.state = {
       checkingSession: true,
+      text: "",
+      username: "",
+      chats: []
     };
   }
 
   async componentDidMount() {
-    if (this.props.location.pathname === "/callback") {
+    if (this.props.location.pathname === "/message") {
       this.setState({ checkingSession: false });
+      const username = window.prompt("Username: ", "Anonymous");
+      this.setState({ username, checkingSession: false });
+      const pusher = new Pusher("be45f6d9f5b297267413", {
+        cluster: "us2",
+        encrypted: true
+      });
+      const channel = pusher.subscribe("chat");
+      channel.bind("message", data => {
+        this.setState({ chats: [...this.state.chats, data], test: "" });
+      });
       return;
     }
     try {
-      await auth0Client.silentAuth();
+      auth0Client.silentAuth()
       this.forceUpdate();
     } catch (err) {
       if (err.error !== "login_required") console.log(err.error);
     }
-    this.setState({ checkingSession: false });
   }
+
+  handleTextChange = (e) => {
+    if (e.keyCode === 13) {
+      const payload = {
+        username: this.state.username,
+        message: this.state.text
+      };
+      axios.post("/message", payload);
+    } else {
+      this.setState({ text: e.target.value });
+    }
+  };
 
   render() {
     return (
@@ -48,14 +75,22 @@ class App extends Component {
           <NavBar />
           <div className="main">
             <Route path="/" exact component={Home} />
-            <Route path="/callback" exact component={Callback} />
-            {/* <Route path="/map" component={Maps} />
-            <Route exact path="/callback" component={Callback} /> */}
-            {/* <SecuredRoute
+            <Route path="/callback" component={Callback} />
+            <Route path="/map" component={Maps} />
+            <Route exact path="/message" component={Callback} />
+            <SecuredRoute
               path="/new-question"
               component={NewQuestion}
               checkingSession={this.state.checkingSession}
-            /> */}
+            />
+            <section>
+              <ChatList chats={this.state.chats} />
+              <ChatBox
+                text={this.state.text}
+                username={this.state.username}
+                handleTextChange={this.handleTextChange}
+              />
+            </section>
             <Footer />
           </div>
         </div>
