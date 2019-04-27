@@ -1,20 +1,19 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import AccountCircle from '@material-ui/icons/AccountCircle';
+import React from "react";
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
+import AccountCircle from "@material-ui/icons/AccountCircle";
 import { Link, withRouter } from "react-router-dom";
 import auth0Client from "../../Auth";
-
 
 const styles = {
   root: {
     flexGrow: 1,
-    marginBottom: 20
+    marginBottom: 20,
   },
   grow: {
     flexGrow: 1,
@@ -73,5 +72,5 @@ NavBar.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-// export default withStyles(styles)(NavBar); 
-export default withRouter(withStyles(styles)(NavBar))
+// export default withStyles(styles)(NavBar);
+export default withRouter(withStyles(styles)(NavBar));

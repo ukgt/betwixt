@@ -7,7 +7,7 @@ class Auth {
       domain: "dev-1f5flisp.auth0.com",
       audience: "https://dev-1f5flisp.auth0.com/userinfo",
       clientID: "mZHUe42c4yE0R1nyFzcoMGss5PwoeESZ",
-      redirectUri: "http://localhost:3000/callback",
+      redirectUri: "http://localhost:3000/message",
       responseType: "id_token",
       scope: "openid profile",
     });
@@ -57,7 +57,7 @@ class Auth {
 
   signOut() {
     this.auth0.logout({
-      returnTo: "http://localhost:3000",
+      returnTo: "http://localhost:3000/message",
       clientID: "mZHUe42c4yE0R1nyFzcoMGss5PwoeESZ",
     });
   }
