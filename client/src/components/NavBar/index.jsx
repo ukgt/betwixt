@@ -31,7 +31,7 @@ function NavBar(props) {
           <Typography variant="h6" color="inherit" className={classes.grow}>
             Between
           </Typography>
-          <Typography variant="h6" color="inherit">Shaun</Typography>
+          <Typography variant="h6" color="inherit">{this.props.name}/Typography>
           <Button color="inherit">Sign Out</Button>
           <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
             <AccountCircle />

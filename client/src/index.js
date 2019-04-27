@@ -4,8 +4,17 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
-ReactDOM.render(<App />, document.getElementById("root"));
-
+let state ={};
+window.setState= (changes) =>{
+state =Object.assign({}, state, changes);
+  ReactDOM.render(<App {...state}/>, document.getElementById("root"));
+}
+/*eslint no-restricted-globals: @*/
+let initialState ={
+  name: "Jim",  
+  location: location.pathname.replace(/^\/?|\/$/g, "")
+};
+window.setState(initialState); 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA

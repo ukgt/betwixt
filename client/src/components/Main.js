@@ -6,25 +6,13 @@ import Maps from "./pages/Maps";
 import SignIn from "./pages/SignIn";
 import Footer from "./components/Footer";
 import NavBar from "./components/NavBar";
+import NavBar from "./Nav"
 
-// CSS
-import "./App.css";
-
-class App extends Component {
-  render() {
-    let maincomponent=""
-      switch (this.props.location) {
-        case "":
-        maincomponent=<Main />;
-        break;
-        case "secret":
-        maincomponent=<Secret />;
-        break;
-        default:
-        maincomponent=<Main />;
-      }
-    return (
-      <Router>
+export default class Main extends Component {
+render(){
+    return(
+        <div>
+<Router>
       <div className="root">
         <NavBar />
         <div className="main">
@@ -34,8 +22,8 @@ class App extends Component {
         </div>
       </div>
     </Router>
-    );
-  }
+            </div>
+    )
 }
 
-export default App;
+}
