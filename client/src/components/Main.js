@@ -6,7 +6,6 @@ import Maps from "./pages/Maps";
 import SignIn from "./pages/SignIn";
 import Footer from "./components/Footer";
 import NavBar from "./components/NavBar";
-import NavBar from "./Nav"
 
 export default class Main extends Component {
 render(){
