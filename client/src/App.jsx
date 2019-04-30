@@ -104,7 +104,8 @@ class App extends Component {
                 render={props => <Home {...props} handleInput={true} />}
               />
               <Route path="/map" render={props => <Maps {...props} />} />
-            <Route exact path="/message" component={Callback} />
+            <Route exact path="/callback" component={Callback} />
+            <Route exact path="/message" component={ChatBox} />
               <SecuredRoute
                 path="/new-question"
                 component={NewQuestion}

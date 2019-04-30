@@ -7,7 +7,7 @@ class Auth {
       domain: "dev-1f5flisp.auth0.com",
       audience: "https://dev-1f5flisp.auth0.com/userinfo",
       clientID: "mZHUe42c4yE0R1nyFzcoMGss5PwoeESZ",
-      redirectUri: "http://localhost:3000/message",
+      redirectUri: "http://localhost:3000/callback",
       responseType: "id_token",
       scope: "openid profile",
     });
