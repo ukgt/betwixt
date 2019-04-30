@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import MapContainer from "./containers/MapContainer";
 import {
   BrowserRouter as Router,
   Route,
@@ -8,8 +7,6 @@ import {
 } from "react-router-dom";
 import Home from "./pages/Home/index";
 import Maps from "./pages/Maps";
-import SignIn from "./pages/SignIn";
-import Footer from "./components/Footer";
 import NavBar from "./components/NavBar";
 import Callback from "./Callback";
 import SecuredRoute from "./components/SecuredRoute/SecuredRoute";
@@ -52,7 +49,6 @@ class App extends Component {
               component={NewQuestion}
               checkingSession={this.state.checkingSession}
             />
-            <Footer />
           </div>
         </div>
       </Router>
