@@ -89,8 +89,5 @@ class App extends Component {
   };
 }
 
-// <<<<<<< HEAD
-// export default App
-// =======
 export default withRouter(App);
-// >>>>>>> 8d3c9a1dc7b65b11ed5ecda6d382e939533fa09d
+

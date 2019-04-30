@@ -55,6 +55,7 @@ function NavBar(props) {
               <button
                 className="btn btn-dark"
                 onClick={() => {
+              
                   signOut();
                 }}
               >

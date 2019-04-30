@@ -3,7 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const user = require("./routes/api/user")
-onst cors = require('cors');
+const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const jwt = require('express-jwt'); 
@@ -35,7 +35,16 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // Add routes, both API and view
-app.use('/api/user', user);
+// app.use('/api/user', user);
+// --------------------------added by Mila------------
+app.post("/api/user", (req, res) => {
+    const user = new User ({
+        name: req.body.name
+    }).save((err, response) => {
+        if(err) res.status(400).send(err)
+        res.status(200).send(response)
+    })
+})
 
 const checkJwt = jwt({
     secret: jwksRsa.expressJwtSecret({

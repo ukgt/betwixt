@@ -6,6 +6,7 @@ const UserSchema = new Schema({
     name: {
         type: String,
         required: true
+        //we need a unique flag here and maybe backend validation
     },
     date: {
         type: Date,
