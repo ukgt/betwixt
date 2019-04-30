@@ -8,11 +8,12 @@ import TextField from "@material-ui/core/TextField";
 export default function FormInput(props) {
   return (
     <TextField
+      name={props.name}
+      onChange={props.handleChange}
       placeholder={props.placeholder}
       id={props.placeholder}
       type="text"
       className="validate"
-      //style={{ marginLeft: 13, marginRight: 13 }}
       fullWidth
       margin="normal"
       InputLabelProps={{

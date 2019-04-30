@@ -19,7 +19,7 @@ function FormContainer(props) {
   const { classes } = props;
 
   return (
-    <Paper className={classes.root} elevation={1}>
+    <Paper className={classes.root} elevation={5}>
       <form>
         {props.children.map(child => {
           return <div className={classes.row}>{child}</div>;
