@@ -62,7 +62,6 @@ const checkJwt = jwt({
 app.post("/message", (req, res) => {
   const payload = req.body;
   pusher.trigger("chat", "message", payload);
-  console.log('heyyyyy');
   res.send(payload);
 });
 // Connect to the Mongo DB
