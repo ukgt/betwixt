@@ -6,7 +6,8 @@ import Paper from "@material-ui/core/Paper";
 import MediaCard from "../components/MediaCard";
 import placeHolder from "../placeholder.png";
 import Typography from "@material-ui/core/Typography";
-//import SlickSlider from "../components/SlickSlider";
+
+import Slider from "../components/Slider";
 
 export class MapContainer extends React.Component {
   constructor(props) {
@@ -32,15 +33,16 @@ export class MapContainer extends React.Component {
       height: "50%"
     },
     paper: {
-      width: "90%",
-      position: "absolute",
       marginTop: 400,
+      width: "90%",
       display: "flex",
       justifyContent: "center",
-      overflow: "scroll",
-      paddingRight: 20
+      overflow: "scroll"
     },
-    container: { display: "flex", justifyContent: "center" }
+    container: {
+      display: "flex",
+      justifyContent: "center"
+    }
   };
 
   findMidPoint = (mapProps, map) => {
@@ -129,7 +131,19 @@ export class MapContainer extends React.Component {
         </Map>
         <div style={this.styles.container}>
           <Paper elevation={5} style={this.styles.paper}>
-            {/* <SlickSlider /> */}
+            {/* <Slider>
+              {this.state.cards.map((card, index) => {
+                return (
+                  <MediaCard
+                    key={index}
+                    name={card.name}
+                    image={card.image}
+                    rating={card.rating}
+                    address={card.address}
+                  />
+                );
+              })}
+            </Slider> */}
             {this.state.cards.length > 0 ? (
               this.state.cards.map((card, index) => {
                 return (
