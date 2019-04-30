@@ -5,16 +5,22 @@ import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
 import querySearch from "stringquery";
 import Paper from "@material-ui/core/Paper";
 import MediaCard from "../components/MediaCard";
-import placeHolder from "../placeholder.png"
+import placeHolder from "../placeholder.png";
+import Typography from "@material-ui/core/Typography";
+
+import Slider from "../components/Slider";
 
 export class MapContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       center: { lat: 29.76328, lng: -95.36327 },
+      error: "",
       markers: [],
-      params: querySearch(this.props.location.search),
-      cards: []
+      cards: [],
+      params: querySearch(
+        window.location.href.slice(window.location.href.indexOf("?"))
+      )
     };
 
     this.Google = this.props.google;
@@ -28,49 +34,17 @@ export class MapContainer extends React.Component {
       height: "50%"
     },
     paper: {
-      width: "90%",
-      position: "absolute",
       marginTop: 400,
+      width: "90%",
       display: "flex",
       justifyContent: "center",
       overflow: "scroll"
     },
-    container: { display: "flex", justifyContent: "center" }
+    container: {
+      display: "flex",
+      justifyContent: "center"
+    }
   };
-
-  // componentDidMount() {
-  //   this.findMidPoint(this.state.params.from, this.state.params.to);
-  // }
-
-  // componentDidUpdate() {
-
-  // }
-
-  // addMarker = newMarkers => {
-  //   this.setState({ markers: newMarkers });
-  // };
-
-  // findMidPoint = (from, to) => {
-  //   this.geocoder.geocode({ address: from }, (fromRes, fromStatus) => {
-  //     if (fromStatus === "OK") {
-  //       this.geocoder.geocode({ address: to }, (toRes, toStatus) => {
-  //         if (toStatus === "OK") {
-  //           const firstLoc = fromRes[0].geometry.location;
-  //           const secondLoc = toRes[0].geometry.location;
-  //           const midPoint = this.Google.maps.geometry.spherical.interpolate(
-  //             firstLoc,
-  //             secondLoc,
-  //             0.5
-  //           );
-  //           this.addMarker([firstLoc, secondLoc, midPoint]);
-  //           this.setState({
-  //             center: midPoint
-  //           });
-  //         } else alert("Second Location Error: " + toStatus);
-  //       });
-  //     } else alert("First Location Error: " + fromStatus);
-  //   });
-  // };
 
   findMidPoint = (mapProps, map) => {
     const { google } = mapProps;
@@ -98,10 +72,16 @@ export class MapContainer extends React.Component {
                     this.fetchPlaces(service);
                   }
                 );
-              } else alert("Second Location Error: " + toStatus);
+              } else {
+                this.setState({ error: "Second Location Not Found" });
+                console.log("Second Location Error: " + toStatus);
+              }
             }
           );
-        } else alert("First Location Error: " + fromStatus);
+        } else {
+          this.setState({ error: "First Location Not Found" });
+          console.log("First Location Error: " + fromStatus);
+        }
       }
     );
   };
@@ -115,21 +95,21 @@ export class MapContainer extends React.Component {
       },
       (res, status) => {
         if (status === "OK") {
-          const markers = [];
-          const cards = [];
+          const newMarkers = [];
+          const newCards = [];
           for (var i = 0; i < res.length; i++) {
             const data = res[i];
             const marker = data.geometry.location;
-            markers.push({ lat: marker.lat(), lng: marker.lng() });
-            cards.push({
+            newMarkers.push({ lat: marker.lat(), lng: marker.lng() });
+            newCards.push({
               name: data.name,
               rating: data.rating,
               image: data.photos ? data.photos[0].getUrl() : placeHolder,
               address: data.formatted_address
             });
           }
-          this.setState({ markers: markers, cards: cards });
-        }
+          this.setState({ markers: newMarkers, cards: newCards });
+        } else this.setState({ error: "No Results Found" });
       }
     );
   };
@@ -152,17 +132,36 @@ export class MapContainer extends React.Component {
         </Map>
         <div style={this.styles.container}>
           <Paper elevation={5} style={this.styles.paper}>
-            {this.state.cards.map((card, index) => {
-              return (
-                <MediaCard
-                  key={index}
-                  name={card.name}
-                  image={card.image}
-                  rating={card.rating}
-                  address={card.address}
-                />
-              );
-            })}
+            {/* <Slider>
+              {this.state.cards.map((card, index) => {
+                return (
+                  <MediaCard
+                    key={index}
+                    name={card.name}
+                    image={card.image}
+                    rating={card.rating}
+                    address={card.address}
+                  />
+                );
+              })}
+            </Slider> */}
+            {this.state.cards.length > 0 ? (
+              this.state.cards.map((card, index) => {
+                return (
+                  <MediaCard
+                    key={index}
+                    name={card.name}
+                    image={card.image}
+                    rating={card.rating}
+                    address={card.address}
+                  />
+                );
+              })
+            ) : (
+              <Typography variant="subtitle1" align="center">
+                {this.state.error}
+              </Typography>
+            )}
           </Paper>
         </div>
       </>
