@@ -1,6 +1,12 @@
 import React, { Component } from "react";
 
 class Weather extends Component {
+  constructor(props) {
+    super(props);
+    this.onSubmit = this.onSubmit.bind(this);
+    this.onInput = this.onInput.bind(this);
+  }
+
     render() {
         return (
             <div>
