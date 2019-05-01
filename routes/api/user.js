@@ -15,10 +15,27 @@ router.get('/', (req, res) => {
 // Create a Post
 // Authentication???
 router.post("/", (req, res) => {
-     const newUser = new User({
-          name: req.body.name
-     });
-     newUser.save().then(user => res.json(user));
+     console.log("req bod", req.body);
+     User.findOne({name: req.body.name}).then( user => {
+          if (user) {
+               //if user exists, send it back in the response:
+               console.log("userExists", user);
+               res.json(user);
+          } else {
+               //if no user is found, create one in our own db
+               const newUser = new User({
+                    name: req.body.name
+               });
+               newUser
+                    .save()
+                    .then(newUser => {
+                         console.log("newUser", newUser);
+                         res.json(newUser);
+                    });
+          }
+          
+     }).catch(err => console.log("ERROR ERROR ERROR ERROR", err));
+
 });
 
 // //DELETE api/user/:id
