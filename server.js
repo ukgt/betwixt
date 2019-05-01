@@ -9,7 +9,7 @@ const morgan = require('morgan');
 const jwt = require('express-jwt'); 
 const jwksRsa = require('jwks-rsa');
 const Pusher = require("pusher");
-
+const path =require('path');
 const app = express();
  
 const PORT = process.env.PORT || 3001;
@@ -34,7 +34,9 @@ app.use(express.json());
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
-
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname,'client','build','index.html'));
+  });
 // Add routes, both API and view
 
 const pusher = new Pusher({
