@@ -8,10 +8,14 @@ const UserSchema = new Schema({
         required: true
         //we need a unique flag here and maybe backend validation
     },
-    date: {
+    updatedAt: {
         type: Date,
         default: Date.now
-    }
+    },
+    messages: [{ type: Schema.Types.ObjectId, ref: "message"}]
+
 });
 
-module.exports = User = mongoose.model('user', UserSchema);
+
+
+module.exports = mongoose.model('user', UserSchema);
