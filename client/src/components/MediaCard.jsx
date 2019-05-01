@@ -38,7 +38,7 @@ function MediaCard(props) {
             {address}
           </Typography>
           <Typography component="p">
-            {"Rating:" + rating}
+            {"Rating: " + rating}
           </Typography>
         </CardContent>
       </CardActionArea>
