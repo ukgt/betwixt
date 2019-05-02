@@ -6,16 +6,11 @@ const UserSchema = new Schema({
     name: {
         type: String,
         required: true
-        //we need a unique flag here and maybe backend validation
     },
-    updatedAt: {
+    date: {
         type: Date,
         default: Date.now
-    },
-    messages: [{ type: Schema.Types.ObjectId, ref: "message"}]
-
+    }
 });
 
-
-
-module.exports = mongoose.model('user', UserSchema);
+module.exports = User = mongoose.model('user', UserSchema);

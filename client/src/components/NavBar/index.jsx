@@ -35,7 +35,7 @@ function NavBar(props) {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" color="inherit" className={classes.grow}>
-            Between
+            Betwixt
           </Typography>
           {/* <Typography variant="h6" color="inherit">Shaun</Typography> */}
           {/* <Button color="inherit">Sign Up/Login</Button>
@@ -49,13 +49,12 @@ function NavBar(props) {
           )}
           {auth0Client.isAuthenticated() && (
             <div>
-              <label className="mr-2 text-white">
+              <label className="m2 text-white">
                 {auth0Client.getProfile().name}
               </label>
               <button
                 className="btn btn-dark"
                 onClick={() => {
-              
                   signOut();
                 }}
               >

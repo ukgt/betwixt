@@ -4,11 +4,13 @@
   "description": "Mapping App that provides mid-point distance and points of interest",
   "main": "server.js",
   "scripts": {
-    "client-install": "npm install --prefix client",
-    "start": "npm start --prefix client",
-    "server": "nodemon server.js",
-    "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm start --prefix client\""
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:prod": "node server.js",
+    "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
+    "client": "cd client && npm run start",
+    "install": "cd client && npm install",
+    "build": "cd client && npm run build",
+    "heroku-postbuild": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -29,6 +31,7 @@
     "express": "^4.16.4",
     "express-jwt": "^5.3.1",
     "helmet": "^3.16.0",
+    "if-env": "^1.0.4",
     "jwks-rsa": "^1.4.0",
     "mongoose": "^5.5.2",
     "morgan": "^1.9.1",
