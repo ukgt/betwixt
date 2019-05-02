@@ -29,6 +29,7 @@
     "express": "^4.16.4",
     "express-jwt": "^5.3.1",
     "helmet": "^3.16.0",
+    "if-env": "^1.0.4",
     "jwks-rsa": "^1.4.0",
     "mongoose": "^5.5.2",
     "morgan": "^1.9.1",
