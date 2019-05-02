@@ -30,6 +30,7 @@ const styles = {
   }
 };
 
+<<<<<<< HEAD
 class NavBar extends Component {
   constructor(props) {
     super(props);
@@ -67,6 +68,42 @@ class NavBar extends Component {
                 variant="outlined"
                 color="inherit"
                 onClick={auth0Client.signIn}
+=======
+function NavBar(props) {
+  const { classes } = props;
+  const signOut = () => {
+    auth0Client.signOut();
+    props.history.replace("/");
+  };
+  return (
+    <div className={classes.root}>
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6" color="inherit" className={classes.grow}>
+            Between
+          </Typography>
+          {/* <Typography variant="h6" color="inherit">Shaun</Typography> */}
+          {/* <Button color="inherit">Sign Up/Login</Button>
+          <IconButton className={classes.menuButton} color="inherit" aria-label="Menu"> */}
+          {/* <AccountCircle /> */}
+          {/* </IconButton> */}
+          {!auth0Client.isAuthenticated() && (
+            <button className="btn btn-dark" onClick={auth0Client.signIn}>
+              Sign In
+            </button>
+          )}
+          {auth0Client.isAuthenticated() && (
+            <div>
+              <label className="mr-2 text-white">
+                {auth0Client.getProfile().name}
+              </label>
+              <button
+                className="btn btn-dark"
+                onClick={() => {
+              
+                  signOut();
+                }}
+>>>>>>> 732d2f9d46d53e8122ea6c8ceda7488543aa9bb2
               >
                 Sign In
               </Button>
