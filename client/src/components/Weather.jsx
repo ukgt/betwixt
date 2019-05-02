@@ -4,9 +4,7 @@ import styled from 'styled-components';
 import Search from './Search/Search';
 import Error from './Error/Error';
 import Forecast from '../containers/Forecast/Forecast'
-// import Search from '/Search';
-// import Forecast from '../containers/Forecast/Forecast';
-// import Error from 'Error';
+
 
 const Application = styled.div`
   text-align: center;
