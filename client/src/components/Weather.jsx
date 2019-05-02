@@ -74,7 +74,7 @@ class Weather extends Component {
   getForecastByCoordinates = async () => {
     try {
       const coords = await this.getUserLocation();
-      const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast/daily?lat=${coords.lat}&lon=${coords.lon}&units=metric&cnt=8&appid=${apiKey}`);
+      const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast/daily?lat=${coords.lat}&lon=${coords.lon}&units=imperial&cnt=8&appid=${apiKey}`);
       const json = await response.json();
       if (json.cod !== '200') {
         this.setState({ error: { state: true } });
