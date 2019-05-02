@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import TextField from 'material-ui/TextField';
-import { cyan500 } from 'material-ui/styles/colors';
+import red from '@material-ui/core/colors/red';
+
 
 const Wrapper = styled.div`
   display: flex;
@@ -39,11 +40,11 @@ const LocationBtn = styled.button`
     transform: scaleX(1);
   }
   :active {
-    color: ${cyan500};
+    color: ${red};
   }
   :active::after {
     transition: none;
-    background-color: ${cyan500};
+    background-color: ${red};
   }
 `;
 
