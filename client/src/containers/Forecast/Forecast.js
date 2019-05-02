@@ -131,7 +131,7 @@ const Weekly = styled.ul`
 
 class Forecast extends Component {
   state = {
-    tempUnit: 'C'
+    tempUnit: 'F'
   }
 
   getDay = (index) => {
@@ -185,7 +185,7 @@ class Forecast extends Component {
           <City>{this.props.city}</City>
           <Toggle
             onToggle={this.changeTempUnit}
-            label={`Change to °${this.state.tempUnit === 'C' ? 'F' : 'C'}`}
+            label={`Change to °${this.state.tempUnit === 'F' ? 'C' : 'F'}`}
             labelStyle={{ whiteSpace: 'nowrap' }}
             style={ToggleStyles}
           />

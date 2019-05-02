@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter as Router } from 'react-router-dom'
-import { cyan500 } from 'material-ui/styles/colors';
+import { red } from 'material-ui/styles/colors';
 import 'weathericons/css/weather-icons.min.css';
 import './index.css'
 import App from './App'

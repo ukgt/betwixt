@@ -48,7 +48,7 @@ class Weather extends Component {
     e.preventDefault();
 
     try {
-      const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast/daily?q=${this.state.city}&units=metric&cnt=8&appid=${apiKey}`);
+      const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast/daily?q=${this.state.city}&units=imperial&cnt=8&appid=${apiKey}`);
       const json = await response.json();
       if (json.cod !== '200') {
         this.setState({ error: { state: true, message: json.message } });
