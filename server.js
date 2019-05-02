@@ -9,7 +9,8 @@ const morgan = require('morgan');
 const jwt = require('express-jwt'); 
 const jwksRsa = require('jwks-rsa');
 const Pusher = require("pusher");
-
+// User Model
+const Message = require("./models/Messages");
 const app = express();
  
 const PORT = process.env.PORT || 3001;
@@ -36,6 +37,16 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // Add routes, both API and view
+app.use('/api/user', user);
+// --------------------------added by Mila------------
+// app.post("/api/user", (req, res) => {
+//     const user = new User ({
+//         name: req.body.name
+//     }).save((err, response) => {
+//         if(err) res.status(400).send(err)
+//         res.status(200).send(response)
+//     })
+// })
 
 const pusher = new Pusher({
   appId: "770235",
@@ -59,11 +70,30 @@ const checkJwt = jwt({
   algorithms: ['RS256']
 });
 
-app.post("/message", (req, res) => {
+app.post(
+  "/message", (req, res) => {
   const payload = req.body;
   pusher.trigger("chat", "message", payload);
-  res.send(payload);
-});
+  //we need to create a new Message object, populate it with _userId from sessionStorage and the message itself from the payload object, and then call the .save() method on our newly constructed message object. 
+  console.log("req bod", req.body);
+  const newMessage = new Message ({
+    _userId: req.body.userId,
+    message: req.body.message
+  })
+        newMessage
+           .save()
+           .then(newMessage => {
+             console.log("newMessage", newMessage);
+             res.json(newMessage);
+           })
+           .catch(err => console.log("ERROR ERROR ERROR ERROR", err)); 
+  })
+  //res.send(payload) ;
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "./client/build/index.html"));
+  });
+
 // Connect to the Mongo DB
 app.use('/api/user', user);
 mongoose

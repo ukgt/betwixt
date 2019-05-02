@@ -1,6 +1,6 @@
 import auth0 from "auth0-js";
-import axios from "axios"
-;
+import axios from "axios";
+
 class Auth {
   constructor() {
     this.auth0 = new auth0.WebAuth({
@@ -33,8 +33,11 @@ class Auth {
   }
 
   signIn() {
-    this.auth0.authorize();
-  }
+     this.auth0.authorize((err, result) => {
+       if (err) console.log(err);
+       console.log(result);
+     });
+    }
 
   handleAuthentication() {
     return new Promise((resolve, reject) => {
@@ -43,12 +46,16 @@ class Auth {
         if (!authResult || !authResult.idToken) {
           return reject(err);
         }
+        console.log(authResult);
         this.setSession(authResult);
-        console.log("HEY!!!!", authResult.idTokenPayload);
-        let username = authResult.idTokenPayload.name;
+        let nickname = authResult.idTokenPayload.name;
         axios.post("/api/user", {
-          name: username
+          name: nickname
+        }).then(response =>{
+          console.log("what's up", response);
+          sessionStorage.setItem("currentUser", response.data._id);
         });
+        //axios.post the userInfo object (or whatever fields we need from it) to our own backend route for users.
         resolve();
       });
     });
