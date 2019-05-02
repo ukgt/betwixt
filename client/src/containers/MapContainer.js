@@ -4,6 +4,7 @@ import MapAutoComplete from "../components/MapAutoComplete";
 import MapMarker from "../components/MapMarker";
 import PlaceCard from "../components/PlaceCard";
 import ConstraintSlider from "../components/ConstraintSlider";
+import config from "../config.json";
 
 import { Button, Input, Divider, message } from "antd";
 require("dotenv").config();
@@ -229,7 +230,7 @@ class MapsContainer extends Component {
         <section className="col-8 h-lg">
           <GoogleMapReact
             bootstrapURLKeys={{
-              key: process.env.REACT_APP_GOOGLE_API_KEY,
+              key: "AIzaSyC-JYaHoz4ovcfhl9XjtrZGxHfUN1vkW9g",
               libraries: ["places", "directions"],
             }}
             defaultZoom={4}

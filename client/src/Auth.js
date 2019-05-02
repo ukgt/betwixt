@@ -1,5 +1,6 @@
 import auth0 from "auth0-js";
-
+import axios from "axios"
+;
 class Auth {
   constructor() {
     this.auth0 = new auth0.WebAuth({
@@ -9,7 +10,7 @@ class Auth {
       clientID: "mZHUe42c4yE0R1nyFzcoMGss5PwoeESZ",
       redirectUri: "http://localhost:3000/callback",
       responseType: "id_token",
-      scope: "openid profile",
+      scope: "openid profile",   
     });
 
     this.getProfile = this.getProfile.bind(this);
@@ -43,6 +44,11 @@ class Auth {
           return reject(err);
         }
         this.setSession(authResult);
+        console.log("HEY!!!!", authResult.idTokenPayload);
+        let username = authResult.idTokenPayload.name;
+        axios.post("/api/user", {
+          name: username
+        });
         resolve();
       });
     });
@@ -57,7 +63,7 @@ class Auth {
 
   signOut() {
     this.auth0.logout({
-      returnTo: "http://localhost:3000",
+      returnTo: "http://localhost:3000/",
       clientID: "mZHUe42c4yE0R1nyFzcoMGss5PwoeESZ",
     });
   }
