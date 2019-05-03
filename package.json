@@ -2,6 +2,9 @@
   "name": "betwixt",
   "version": "1.0.0",
   "description": "Mapping App that provides mid-point distance and points of interest",
+  "engines": {
+    "node": "10.15.3"
+  },
   "main": "server.js",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
