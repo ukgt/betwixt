@@ -10,7 +10,7 @@ class Auth {
       clientID: "mZHUe42c4yE0R1nyFzcoMGss5PwoeESZ",
       redirectUri: "http://localhost:3000/callback",
       responseType: "id_token",
-      scope: "openid profile",   
+      scope: "openid profile",
     });
 
     this.getProfile = this.getProfile.bind(this);
@@ -46,7 +46,6 @@ class Auth {
         if (!authResult || !authResult.idToken) {
           return reject(err);
         }
-        console.log(authResult);
         this.setSession(authResult);
         let nickname = authResult.idTokenPayload.name;
         axios.post("/api/user", {
