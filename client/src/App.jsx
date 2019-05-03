@@ -13,7 +13,6 @@ import SecuredRoute from "./components/SecuredRoute/SecuredRoute";
 import NewQuestion from "./components/NewQuestion/NewQuestion";
 import auth0Client from "./Auth";
 import Message from './components/Message';
-import Weather from './components/Weather';
 // CSS
 // import "./App.css";
 
@@ -45,10 +44,9 @@ class App extends Component {
             <Route path="/callback" component={Callback} />
             <Route path="/map" component={Maps} />
             <Route exact path="/message" component={Message} />
-            {/* <Route exact path="/weather" component={Weather} /> */}
             <SecuredRoute
-              path="/weather"
-              component={Weather}
+              path="/new-question"
+              component={NewQuestion}
               checkingSession={this.state.checkingSession}
             />
           </div>
