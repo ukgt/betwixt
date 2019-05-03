@@ -43,7 +43,7 @@
     "pusher-js": "^4.4.0"
   },
   "devDependencies": {
-    "eslint": "5.12.0",
+    "eslint": "^5.16.0",
     "eslint-plugin-react": "^7.12.4",
     "nodemon": "^1.18.11"
   }
