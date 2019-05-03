@@ -45,10 +45,10 @@ class App extends Component {
             <Route path="/callback" component={Callback} />
             <Route path="/map" component={Maps} />
             <Route exact path="/message" component={Message} />
-            <Route exact path="/weather" component={Weather} />
+            {/* <Route exact path="/weather" component={Weather} /> */}
             <SecuredRoute
-              path="/new-question"
-              component={NewQuestion}
+              path="/weather"
+              component={Weather}
               checkingSession={this.state.checkingSession}
             />
           </div>
