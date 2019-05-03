@@ -35,7 +35,7 @@ function NavBar(props) {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" color="inherit" className={classes.grow}>
-            Between
+            Betwixt
           </Typography>
           {/* <Typography variant="h6" color="inherit">Shaun</Typography> */}
           {/* <Button color="inherit">Sign Up/Login</Button>

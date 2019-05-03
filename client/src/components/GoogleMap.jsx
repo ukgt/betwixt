@@ -1,7 +1,7 @@
 import React from "react";
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
 // TODO: uncomment this line below 
-import config from "../config.json";
+// import config from "../config.json";
 import querySearch from "stringquery";
 import Paper from "@material-ui/core/Paper";
 import MediaCard from "../components/MediaCard";
@@ -171,6 +171,6 @@ export class MapContainer extends React.Component {
 
 // TODO: uncomment the code below
 export default GoogleApiWrapper({
-  apiKey: config.mapsKey,
+  apiKey: process.env.REACT_APP_mapsKey,
   libraries: ["geometry", "places"]
 })(MapContainer);

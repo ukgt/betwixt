@@ -32,7 +32,7 @@ class NewQuestion extends Component {
     });
 
     await axios.post(
-      "http://localhost:3001",
+      "https://betwixt-gt.herokuapp.com/",
       {
         title: this.state.title,
         description: this.state.description,
