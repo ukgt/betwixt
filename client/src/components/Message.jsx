@@ -27,10 +27,11 @@ export default class Message extends React.Component {
   }
   handleTextChange = e => {
     if (e.keyCode === 13) {
-      const payload = {
-        username: this.state.username,
+      let payload = {
+        userId: sessionStorage.getItem("currentUser"),
         message: this.state.text
       };
+      console.log("hey!!!" , payload);
       axios.post("/message", payload);
     } else {
       this.setState({ text: e.target.value });
