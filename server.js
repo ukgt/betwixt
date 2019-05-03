@@ -90,14 +90,10 @@ app.post(
   })
   //res.send(payload) ;
 
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "./client/build/index.html"));
-  });
-
 // Connect to the Mongo DB
 app.use('/api/user', user);
 mongoose
-    .connect(process.env.MONGODB_URI || "mongodb+srv://Betwixt:b12345@gettingstarted-0lbr7.mongodb.net/test?retryWrites=true")
+    .connect(process.env.MONGODB_URI || "mongodb://localhost/reactreadinglist")
     .then(() => console.log("MongoDB Connected..."))
     .catch((err => console.log(err)));
 
