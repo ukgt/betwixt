@@ -10,19 +10,38 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
+import Paper from "@material-ui/core/Paper";
+import Typography from "@material-ui/core/Typography";
+
 
 const styles = {
   list: {
-    width: 250
+    width: "auto",
+    //backgroundColor: "grey"
   },
   fullList: {
     width: "auto"
+  },
+  header: {
+    marginTop: 16,
+    marginBottom: 16,
+    padding: 16,
+    color: "red",
   }
 };
 
 function TemporaryDrawer(props) {
   const { classes, opened, handleDrawer } = props;
 
+
+  const chatArea = (
+    <div >
+      <Typography variant="h3" align="center" className={classes.header}>
+        Hello to the chat!
+      </Typography>
+      <Divider variant="middle" />
+    </div>
+  )
   const sideList = (
     <div className={classes.list}>
       <List>
@@ -55,15 +74,20 @@ function TemporaryDrawer(props) {
         anchor="right"
         open={opened}
         onClose={handleDrawer}
+        className={classes.list}
       >
-        <div
+        {/* <div
           tabIndex={0}
           role="button"
         //   onClick={handleDrawer}
         //   onKeyDown={handleDrawer}
         >
           {sideList}
-        </div>
+        </div> */}
+        {/* <Paper elevation={5} className={classes.list}>
+        Hello World
+        </Paper> */}
+        {chatArea}
       </Drawer>
     </div>
   );

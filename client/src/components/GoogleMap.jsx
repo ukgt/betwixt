@@ -169,7 +169,6 @@ export class MapContainer extends React.Component {
   }
 }
 
-// TODO: uncomment the code below
 export default GoogleApiWrapper({
   apiKey: config.mapsKey,
   libraries: ["geometry", "places"]

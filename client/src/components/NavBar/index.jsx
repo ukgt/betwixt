@@ -11,6 +11,7 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import { Link, withRouter } from "react-router-dom";
 import auth0Client from "../../Auth";
 import renderEmpty from "antd/lib/config-provider/renderEmpty";
+import logo from "../../logo.png"
 
 const styles = {
   root: {
@@ -20,17 +21,18 @@ const styles = {
   grow: {
     flexGrow: 1
   },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20
+  mx: {
+    marginLeft: 5,
+    marginRight: 5
   },
   authPanel: {
-    display: "flex",
-    justifyContent: "space-between"
+    display: "flex"
+  }, 
+  logo: {
+    height: 60
   }
 };
 
-<<<<<<< HEAD
 class NavBar extends Component {
   constructor(props) {
     super(props);
@@ -39,7 +41,6 @@ class NavBar extends Component {
       opened: false
     };
   }
-  //
 
   render() {
     const { classes, history } = this.props;
@@ -57,9 +58,15 @@ class NavBar extends Component {
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
-            <Typography variant="h6" color="inherit" className={classes.grow}>
+            <div className={classes.grow}>
+            <Button component={Link} to="/">
+            <img src={logo} alt="logo" className={classes.logo}/>
+            </Button>
+            </div>
+
+            {/* <Typography variant="h6" color="inherit" className={classes.grow}>
               Between
-            </Typography>
+            </Typography> */}
             {/* <Typography variant="h6" color="inherit">Shaun</Typography> */}
             {/* <Button color="inherit">Sign Up/Login</Button> */}
 
@@ -68,42 +75,7 @@ class NavBar extends Component {
                 variant="outlined"
                 color="inherit"
                 onClick={auth0Client.signIn}
-=======
-function NavBar(props) {
-  const { classes } = props;
-  const signOut = () => {
-    auth0Client.signOut();
-    props.history.replace("/");
-  };
-  return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" color="inherit" className={classes.grow}>
-            Between
-          </Typography>
-          {/* <Typography variant="h6" color="inherit">Shaun</Typography> */}
-          {/* <Button color="inherit">Sign Up/Login</Button>
-          <IconButton className={classes.menuButton} color="inherit" aria-label="Menu"> */}
-          {/* <AccountCircle /> */}
-          {/* </IconButton> */}
-          {!auth0Client.isAuthenticated() && (
-            <button className="btn btn-dark" onClick={auth0Client.signIn}>
-              Sign In
-            </button>
-          )}
-          {auth0Client.isAuthenticated() && (
-            <div>
-              <label className="mr-2 text-white">
-                {auth0Client.getProfile().name}
-              </label>
-              <button
-                className="btn btn-dark"
-                onClick={() => {
-              
-                  signOut();
-                }}
->>>>>>> 732d2f9d46d53e8122ea6c8ceda7488543aa9bb2
+                className={classes.mx}
               >
                 Sign In
               </Button>
@@ -121,6 +93,7 @@ function NavBar(props) {
                 <Button
                   variant="outlined"
                   color="inherit"
+                  className={classes.mx}
                   onClick={() => {
                     this.signOut();
                   }}
