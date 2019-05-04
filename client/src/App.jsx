@@ -21,7 +21,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      checkingSession: true,
+      checkingSession: false,
     };
   }
 
