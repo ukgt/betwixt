@@ -76,7 +76,8 @@ app.post(
   console.log("req bod", req.body);
   const newMessage = new Message ({
     _userId: req.body.userId,
-    message: req.body.message
+    message: req.body.message,
+    userName: req.body.userName
   })
         newMessage
            .save()
