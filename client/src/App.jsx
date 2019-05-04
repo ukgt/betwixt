@@ -44,11 +44,11 @@ class App extends Component {
             <Route path="/" exact component={Home} />
             <Route path="/callback" component={Callback} />
             <Route path="/map" component={Maps} />
-            <Route exact path="/message" component={Message} />
+            {/* <Route exact path="/message" component={Message} /> */}
             <Route exact path="/weather" component={Weather} />
             <SecuredRoute
-              path="/new-question"
-              component={NewQuestion}
+              path="/message"
+              component={Message}
               checkingSession={this.state.checkingSession}
             />
           </div>
@@ -59,4 +59,3 @@ class App extends Component {
 }
 
 export default withRouter(App);
-
