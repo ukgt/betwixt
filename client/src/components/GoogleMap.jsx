@@ -1,14 +1,13 @@
 import React from "react";
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
-// TODO: uncomment this line below 
-// import config from "../config.json";
 import querySearch from "stringquery";
 import Paper from "@material-ui/core/Paper";
 import MediaCard from "../components/MediaCard";
 import placeHolder from "../placeholder.png";
 import Typography from "@material-ui/core/Typography";
-
 import Slider from "../components/Slider";
+import dotenv from 'dotenv'
+dotenv.config()
 
 export class MapContainer extends React.Component {
   constructor(props) {
@@ -169,8 +168,7 @@ export class MapContainer extends React.Component {
   }
 }
 
-// TODO: uncomment the code below
 export default GoogleApiWrapper({
-  apiKey: process.env.REACT_APP_mapsKey,
-  libraries: ["geometry", "places"]
+  apiKey: process.env.REACT_APP_mapsKey || process.env.REACT_APP_LOCAL_MAPS_KEY,
+  libraries: ["geometry", "places", "directions"]
 })(MapContainer);
