@@ -15,6 +15,11 @@ import Typography from "@material-ui/core/Typography";
 
 
 const styles = {
+  container: {
+    backgroundColor: "grey",
+    height: "auto",
+    width: ""
+  },
   list: {
     width: "auto",
     //backgroundColor: "grey"
@@ -26,7 +31,7 @@ const styles = {
     marginTop: 16,
     marginBottom: 16,
     padding: 16,
-    color: "red",
+    color: "white",
   }
 };
 
@@ -35,11 +40,12 @@ function TemporaryDrawer(props) {
 
 
   const chatArea = (
-    <div >
+    <div className={classes.container}>
       <Typography variant="h3" align="center" className={classes.header}>
         Hello to the chat!
       </Typography>
       <Divider variant="middle" />
+
     </div>
   )
   const sideList = (
