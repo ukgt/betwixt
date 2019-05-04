@@ -39,6 +39,12 @@ export default class Message extends React.Component {
   handleUsernameSubmit = (event) => {
     event.preventDefault();
 
+    const usernameElement = event.target.querySelector('[name="username"]');
+
+    if (usernameElement) {
+      this.setState({ username: usernameElement.value });
+    }
+
     console.log(event.target)
   }
 
