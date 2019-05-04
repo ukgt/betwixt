@@ -10,6 +10,7 @@ class Auth {
       clientID: "mZHUe42c4yE0R1nyFzcoMGss5PwoeESZ",
       redirectUri: process.env.REACT_APP_AUTHENTICATION_REDIRECT ||
         "https://betwixt-gt.herokuapp.com/callback",
+      // redirectUri: process.env.REDIRECT_URL || "https://betwixt-gt.herokuapp.com/callback",
       responseType: "id_token",
       scope: "openid profile"
     });

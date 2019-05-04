@@ -1,17 +1,18 @@
-import React from "react";
-import "./ChatList.css";
+import React from 'react'
+import './ChatList.css'
 // import avatar from "./avatar.png";
-export default ({ chats }) => (
+export default ({ chats, username }) => (
   <ul>
+    {console.log(chats)}
     {chats.map(chat => {
       return (
         <div>
-          <div className="row show-grid">
-            <div className="col-xs-12">
-              <div className="chatMessage">
-                <div key={chat.id} className="box">
+          <div className='row show-grid'>
+            <div className='col-xs-12'>
+              <div className='chatMessage'>
+                <div key={chat.id} className='box'>
                   <p>
-                    <strong>{chat.username}</strong>
+                    <strong>{username}</strong>
                   </p>
                   <p>{chat.message}</p>
                 </div>
@@ -26,7 +27,7 @@ export default ({ chats }) => (
             </div>
           </div>
         </div>
-      );
+      )
     })}
   </ul>
-);
+)
