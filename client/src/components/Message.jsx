@@ -14,8 +14,6 @@ export default class Message extends React.Component {
   };
   async componentDidMount() {
     this.setState({ checkingSession: false });
-    const username = window.prompt("Username: ", "Anonymous"); // TODO: 
-    this.setState({ username, checkingSession: false });
     const pusher = new Pusher("be45f6d9f5b297267413", {
       cluster: "us2",
       encrypted: true
@@ -38,10 +36,31 @@ export default class Message extends React.Component {
     }
   };
 
+  handleUsernameSubmit = (event) => {
+    event.preventDefault();
+
+    console.log(event.target)
+  }
+
+
+  renderGrabUserName = () => {
+    return (
+      <div>
+        <label>Enter Username:</label>
+        <form onSubmit={this.handleUsernameSubmit}>
+          <input name="username" type="text" />
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    );
+  }
+
   render() {
+    const { username } = this.state;
     // JSX
     return (
       <div>
+        {username ?
         <section>
           <ChatList chats={this.state.chats} />
           <ChatBox
@@ -50,6 +69,9 @@ export default class Message extends React.Component {
             handleTextChange={this.handleTextChange}
           />
         </section>
+        :
+        this.renderGrabUserName()
+        }
       </div>
     );
   }
