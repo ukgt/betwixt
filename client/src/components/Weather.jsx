@@ -4,7 +4,9 @@ import styled from 'styled-components';
 import Search from './Search/Search';
 import Error from './Error/Error';
 import Forecast from '../containers/Forecast/Forecast'
-import config from "../config.json";
+//import config from "../config.json";
+import dotenv from 'dotenv'
+dotenv.config()
 
 
 const Application = styled.div`
@@ -31,7 +33,8 @@ const Card = styled.div`
   }
 `;
 
-const apiKey = process.env.REACT_APP_weatherKey || config.weatherKey;
+console.log(process.env)
+const apiKey = process.env.REACT_APP_weatherKey || process.env.REACT_APP_LOCAL_WEATHER_KEY;
 
 class Weather extends Component {
   state = {
