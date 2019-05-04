@@ -9,6 +9,7 @@ const morgan = require('morgan');
 const jwt = require('express-jwt'); 
 const jwksRsa = require('jwks-rsa');
 const Pusher = require("pusher");
+const path = require("path");
 // User Model
 const Message = require("./models/Messages");
 const app = express();
@@ -31,10 +32,7 @@ app.use(morgan('combined'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Serve up static assets (usually on heroku)
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-}
+
 
 // Add routes, both API and view
 app.use('/api/user', user);
@@ -97,6 +95,15 @@ mongoose
     .then(() => console.log("MongoDB Connected..."))
     .catch((err => console.log(err)));
 
+
+// Serve up static assets (usually on heroku)
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "./client/build/index.html"));
+});
 
 // Start the API server
 app.listen(PORT, () => console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`));

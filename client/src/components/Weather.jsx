@@ -30,7 +30,7 @@ const Card = styled.div`
   }
 `;
 
-const apiKey = 'dbb624c32c7f0d652500552c5ebbde56';
+const apiKey = process.env.REACT_APP_weatherKey;
 
 class Weather extends Component {
   state = {
