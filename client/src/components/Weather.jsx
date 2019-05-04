@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Search from './Search/Search';
 import Error from './Error/Error';
 import Forecast from '../containers/Forecast/Forecast'
+import config from "../config.json";
 
 
 const Application = styled.div`
@@ -30,7 +31,7 @@ const Card = styled.div`
   }
 `;
 
-const apiKey = process.env.REACT_APP_weatherKey;
+const apiKey = process.env.REACT_APP_weatherKey || config.weatherKey;
 
 class Weather extends Component {
   state = {
