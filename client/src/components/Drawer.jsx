@@ -18,7 +18,7 @@ const styles = {
   container: {
     backgroundColor: "grey",
     height: "auto",
-    width: ""
+    width: "auto"
   },
   list: {
     width: "auto",
