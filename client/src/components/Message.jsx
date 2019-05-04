@@ -27,6 +27,7 @@ export default class Message extends React.Component {
     if (e.keyCode === 13) {
       let payload = {
         userId: sessionStorage.getItem('currentUser'),
+        userName: this.state.username,
         message: this.state.text
       }
       console.log('hey!!!', payload)
