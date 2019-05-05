@@ -6,13 +6,14 @@ import MediaCard from "../components/MediaCard";
 import placeHolder from "../placeholder.png";
 import Typography from "@material-ui/core/Typography";
 import Slider from "../components/Slider";
-import dotenv from 'dotenv'
-dotenv.config()
+import dotenv from "dotenv";
+dotenv.config();
 
 export class MapContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      origins: { first: {}, second: {} },
       center: { lat: 29.76328, lng: -95.36327 },
       error: "",
       markers: [],
@@ -25,6 +26,7 @@ export class MapContainer extends React.Component {
     this.Google = this.props.google;
     this.map = document.getElementsByClassName("map");
     this.geocoder = new this.Google.maps.Geocoder();
+    this.directions = new this.Google.maps.DirectionsService();
   }
 
   styles = {
@@ -65,6 +67,10 @@ export class MapContainer extends React.Component {
                 );
                 this.setState(
                   {
+                    origins: {
+                      from: fromRes[0].geometry.location,
+                      to: toRes[0].geometry.location
+                    },
                     center: midPoint
                   },
                   () => {
@@ -109,6 +115,15 @@ export class MapContainer extends React.Component {
           }
           this.setState({ markers: newMarkers, cards: newCards });
         } else this.setState({ error: "No Results Found" });
+      }
+    );
+  };
+
+  fetchDirections = (address) => {
+    this.directions.route(
+      { origin: this.state.from, destination: address, travelMode: "" },
+      res => {
+        console.log(res);
       }
     );
   };

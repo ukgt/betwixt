@@ -27,8 +27,9 @@ function FormButton(props) {
         size="large"
         color="primary"
         className={classes.root}
-        component={Link}
-        to={props.to}
+        onClick={props.handleValidation}
+        // component={Link}
+        // to={props.to}
       >
         {props.name}
       </Button>
