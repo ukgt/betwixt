@@ -31,11 +31,34 @@ const styles = theme => ({
 
 class IconTabs extends Component {
   state = {
+    name: "car",
     value: 0
   };
 
   handleChange = (event, value) => {
-    this.setState({ value });
+    console.log(event);
+    const { onValueChanged } = this.props;
+    this.setState({ value }, () => {
+      let mode = "";
+      switch (value) {
+        case 0:
+          mode = "DRIVING";
+          break;
+        case 1:
+          mode = "TRANSIT";
+          break;
+        case 2:
+          mode = "WALKING";
+          break;
+        case 3:
+          mode = "BICYCLING";
+          break;
+        default:
+          mode = "DRIVING";
+          break;
+      }
+      onValueChanged(mode);
+    });
   };
 
   render() {
@@ -45,28 +68,17 @@ class IconTabs extends Component {
       <Paper className={classes.root} elevation={5}>
         <Tabs
           classes={{ root: classes.tabsRoot, indicator: classes.tabsIndicator }}
+          name={"transporation"}
           value={this.state.value}
           onChange={this.handleChange}
           variant="fullWidth"
           indicatorColor="primary"
           textColor="primary"
         >
-          <Tab
-            icon={<DirectionsCar />}
-            label="CAR"
-          />
-          <Tab
-            icon={<DirectionsBus />}
-            label="BUS"
-          />
-          <Tab
-            icon={<DirectionsWalk />}
-            label="WALK"
-          />
-          <Tab
-            icon={<DirectionsBike />}
-            label="BIKE"
-          />
+          <Tab icon={<DirectionsCar />} label="CAR" />
+          <Tab icon={<DirectionsBus />} label="TRANSIT" />
+          <Tab icon={<DirectionsWalk />} label="WALK" />
+          <Tab icon={<DirectionsBike />} label="BIKE" />
         </Tabs>
       </Paper>
     );
