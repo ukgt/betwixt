@@ -34,7 +34,6 @@ function WeatherWidget(props) {
           </div>
           <Button variant="outlined" color="primary" component={Link} to="/weather">Weather Placeholder</Button>
         </Toolbar>
-
       </AppBar>
     </div>
   );
