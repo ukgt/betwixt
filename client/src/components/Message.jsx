@@ -11,6 +11,26 @@ export default class Message extends React.Component {
     username: '',
     chats: []
   };
+
+  styles={
+    form: {
+      
+      marginTop:20
+     
+    },
+    button:{
+      background:"#536dfe",
+      color: "white",
+      border:"none",
+      padding:"15px 32px"     
+    },
+    input:{
+     border:"3px solid #536dfe",
+     padding:"12px 20px",
+    //  marginLeft:"340px"
+    }
+  }
+
   async componentDidMount() {
     this.setState({ checkingSession: false });
     const pusher = new Pusher("be45f6d9f5b297267413", {
@@ -53,11 +73,10 @@ export default class Message extends React.Component {
   renderGrabUserName = () => {
     return (
       <div>
-        <label>Enter Username:</label>
-        <form onSubmit={this.handleUsernameSubmit}>
-          <input name="username" type="text" />
-          <button type="submit">Submit</button>
-        </form>
+      <form onSubmit={this.handleUsernameSubmit} style={this.styles.form}>
+        <input name="username" type="text" style={this.styles.input} placeholder="Enter Chat Name" />
+        <button type="submit" style={this.styles.button}>Submit</button>
+      </form>
       </div>
     );
   }
