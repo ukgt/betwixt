@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import FormContainer from "../../components/FormContainer";
 import FormInput from "../../components/FormInput";
-// import NavBar from "../../components/NavBar";
-// import { Link } from "react-router-dom";
-// import Button from "@material-ui/core/Button";
+import NavBar from "../../components/NavBar";
+import { Link, Redirect } from "react-router-dom";
+import Button from "@material-ui/core/Button";
 import Tab from "../../components/Tab";
 import FormButton from "../../components/FormButton";
 import { withStyles } from "@material-ui/core/styles";
@@ -29,7 +29,10 @@ class Home extends Component {
     this.state = {
       locationA: "",
       locationB: "",
-      pointOfInterest: ""
+      pointOfInterest: "",
+      transportation: "DRIVING",
+      error: { locationA: false, locationB: false, pointOfInterest: false },
+      toMap: false
     };
   }
 
@@ -43,9 +46,47 @@ class Home extends Component {
     });
   };
 
+  handleTransportation = val => {
+    this.setState({ transportation: val });
+  };
+
+  handleValidation = () => {
+    this.setState(
+      {
+        error: {
+          locationA: this.state.locationA.length === 0,
+          locationB: this.state.locationB.length === 0,
+          pointOfInterest: this.state.pointOfInterest.length === 0
+        }
+      },
+      () => {
+        if (
+          !this.state.error.locationA &&
+          !this.state.error.locationB &&
+          !this.state.error.pointOfInterest
+        ) {
+          this.setState({ toMap: true });
+        }
+      }
+    );
+  };
+
   render() {
     const { classes } = this.props;
-    // const { autoCompleteService, geoCoderService } = this.state;
+    const {
+      locationA,
+      locationB,
+      pointOfInterest,
+      transportation,
+    } = this.state;
+
+    if (this.state.toMap) {
+      return (
+        <Redirect
+          to={`/map?from=${locationA}&to=${locationB}&point=${pointOfInterest}&mode=${transportation}`}
+        />
+      );
+    }
 
     return (
       <div className="Site">
@@ -55,20 +96,23 @@ class Home extends Component {
               <FormInput
                 placeholder={"First Location"}
                 name={"locationA"}
-                value={this.state.locationA}
+                value={locationA}
                 handleChange={this.handleChange}
+                error={this.state.error.locationA}
               />
               <FormInput
                 placeholder={"Second Location"}
                 name={"locationB"}
-                value={this.state.locationB}
+                value={locationB}
                 handleChange={this.handleChange}
+                error={this.state.error.locationB}
               />
               <FormInput
                 placeholder={"Point of Interest"}
                 name={"pointOfInterest"}
-                value={this.state.pointOfInterest}
+                value={pointOfInterest}
                 handleChange={this.handleChange}
+                error={this.state.error.pointOfInterest}
               />
               {/* <MapAutoComplete
                 autoCompleteService={autoCompleteService}
@@ -78,9 +122,12 @@ class Home extends Component {
                 // addMarker={this.addMarker}
               /> */}
             </FormContainer>
-            <Tab />
+            <Tab onValueChanged={this.handleTransportation} />
             <div className="row">
-              <FormButton name={"SUBMIT"} to={`/map?from=${this.state.locationA}&to=${this.state.locationB}&point=${this.state.pointOfInterest}`} />
+              <FormButton
+                name={"SUBMIT"}
+                handleValidation={this.handleValidation}
+              />
             </div>
           </Grid>
         </Grid>

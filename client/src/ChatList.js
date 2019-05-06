@@ -1,8 +1,9 @@
-import React from "react";
-import "./ChatList.css";
+import React from 'react'
+import './ChatList.css'
 // import avatar from "./avatar.png";
-export default ({ chats }) => (
+export default ({ chats, username }) => (
   <ul>
+    {console.log(chats)}
     {chats.map(chat => {
       return (
         <div>
@@ -11,7 +12,7 @@ export default ({ chats }) => (
               <div className="chatMessage">
                 <div key={chat.id} className="box">
                   <p>
-                    <strong>{chat.username}</strong>
+                    <strong>{chat.userName}</strong>
                   </p>
                   <p>{chat.message}</p>
                 </div>
@@ -29,4 +30,4 @@ export default ({ chats }) => (
       );
     })}
   </ul>
-);
+)
