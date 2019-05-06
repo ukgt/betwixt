@@ -95,9 +95,15 @@ class Home extends Component {
       <div className="Site">
         <Grid container justify={"center"} spacing={24}>
           <Grid item xs={9}>
-          
             <FormContainer>
               <LocationSearchInput
+                // placeholder={"First Location"}
+                // name={"locationA"}
+                // value={locationA}
+                // handleChange={this.handleChange}
+                // error={this.state.error.locationA}
+              />
+              <FormInput
                 placeholder={"First Location"}
                 name={"locationA"}
                 value={locationA}
