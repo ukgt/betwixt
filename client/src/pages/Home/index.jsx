@@ -9,7 +9,7 @@ import FormButton from "../../components/FormButton";
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import PropTypes from "prop-types";
-import Geosuggest from "react-geosuggest";
+import LocationSearchInput from '../../components/LocationSearchInput'
 
 const styles = theme => ({
   root: {
@@ -95,14 +95,9 @@ class Home extends Component {
       <div className="Site">
         <Grid container justify={"center"} spacing={24}>
           <Grid item xs={9}>
-            <Geosuggest
-              placeholder="Start typing!"
-              onSuggestSelect={this.onSuggestSelect}
-              location={new google.maps.LatLng(53.558572, 9.9278215)}
-              radius="20"
-            />
+          
             <FormContainer>
-              <FormInput
+              <LocationSearchInput
                 placeholder={"First Location"}
                 name={"locationA"}
                 value={locationA}
