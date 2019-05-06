@@ -7,20 +7,28 @@ import Paper from "@material-ui/core/Paper";
 import MediaCard from "../components/MediaCard";
 import placeHolder from "../placeholder.png";
 import Typography from "@material-ui/core/Typography";
+import midPointIcon from "../betwixt-symbol.png";
+// import Polyline from "../components/Polyline";
 
-import Slider from "../components/Slider";
+// import Slider from "../components/Slider";
+// import { configConsumerProps } from "antd/lib/config-provider";
 
 export class MapContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      center: { lat: 29.76328, lng: -95.36327 },
+      firstLocation: {},
+      secondLocation: {},
+      center: {},  // lat: 29.76328, lng: -95.36327 
       error: "",
       markers: [],
       cards: [],
       params: querySearch(
         window.location.href.slice(window.location.href.indexOf("?"))
-      )
+      ),
+      showingInfoWindow: false,
+      activeMarker: {},
+      selectedPlace: {},
     };
 
     this.Google = this.props.google;
@@ -46,9 +54,29 @@ export class MapContainer extends React.Component {
     }
   };
 
+  onMarkerClick = (props, marker, e) =>
+    this.setState({
+      selectedPlace: props,
+      activeMarker: marker,
+      showingInfoWindow: true
+    });
+
+  onMapClicked = (props) => {
+    if (this.state.showingInfoWindow) {
+      this.setState({
+        showingInfoWindow: false,
+        activeMarker: null
+      })
+    }
+  };
+
   findMidPoint = (mapProps, map) => {
     const { google } = mapProps;
     const service = new google.maps.places.PlacesService(map);
+    let start = this.state.params.from;
+    let end = this.state.params.to;
+    // var travelMode = google.maps.DirectionsTravelMode.DRIVING
+    // console.log(start, end);
     this.geocoder.geocode(
       { address: this.state.params.from },
       (fromRes, fromStatus) => {
@@ -59,6 +87,12 @@ export class MapContainer extends React.Component {
               if (toStatus === "OK") {
                 const firstLoc = fromRes[0].geometry.location;
                 const secondLoc = toRes[0].geometry.location;
+                // const poly = new google.maps.Polyine({
+                //   strokeColor: '#000000',
+                //   strokeOpacity: 1,
+                //   strokeWeight: 3,
+                //   map: map
+                // })
                 const midPoint = this.Google.maps.geometry.spherical.interpolate(
                   firstLoc,
                   secondLoc,
@@ -66,6 +100,8 @@ export class MapContainer extends React.Component {
                 );
                 this.setState(
                   {
+                    firstLocation: start,
+                    secondLocation: end,
                     center: midPoint
                   },
                   () => {
@@ -125,10 +161,54 @@ export class MapContainer extends React.Component {
           center={this.state.center}
           zoom={12}
           onReady={this.findMidPoint}
+          onClick={this.onMapClicked}
         >
+          {/* Custom Mid Point Marker */}
+          <Marker 
+            key="0" 
+            position={this.state.center} 
+            onClick={this.onMarkerClick} 
+            name={'Midpoint'} 
+            icon={{
+              url: midPointIcon,
+              scaledSize: new this.props.google.maps.Size(40,45)
+            }} 
+          />
+          {/* Result Markers */}
           {this.state.markers.map((marks, index) => {
-            return <Marker key={index} position={marks} />;
+            // let addressUrl = "https://www.google.com/maps/dir/4094+Berwick+Farm+Dr,+Duluth,+GA+30096,+USA/Atlanta,+Georgia";
+            // let secondUrl = "https://www.google.com/maps/dir/" + this.state.params.to + "/" + this.state.cards[index].address;
+            // console.log(firstUrl);
+            return <Marker 
+              key={index+1} 
+              position={marks} 
+              onClick={this.onMarkerClick} 
+              name={this.state.cards[index].name}
+              address={this.state.cards[index].address} 
+              // firstUrl={addressUrl}
+              // secondUrl={secondUrl}
+              />;
           })}
+          {/* InfoWindow */}
+          <InfoWindow 
+            marker={this.state.activeMarker}
+            visible={this.state.showingInfoWindow}>
+              <div>
+                <h2>{this.state.selectedPlace.name}</h2>
+                <hr></hr>
+                <p>{this.state.selectedPlace.address}</p>
+                {/* <h5><a href={this.state.markers.addressUrl}>From First Location</a> | </h5> */}
+              </div>
+          </InfoWindow>
+          {/* <Polyline
+            path={[
+              this.state.params.from,
+              this.state.params.to
+            ]}
+            strokeColor="#0000FF"
+            strokeOpacity={0.8}
+            strokeWeight={2}
+          /> */}
         </Map>
         <div style={this.styles.container}>
           <Paper elevation={5} style={this.styles.paper}>

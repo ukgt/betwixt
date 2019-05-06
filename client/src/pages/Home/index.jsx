@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 import FormContainer from "../../components/FormContainer";
 import FormInput from "../../components/FormInput";
-import NavBar from "../../components/NavBar";
-import { Link } from "react-router-dom";
-import Button from "@material-ui/core/Button";
+// import NavBar from "../../components/NavBar";
+// import { Link } from "react-router-dom";
+// import Button from "@material-ui/core/Button";
 import Tab from "../../components/Tab";
 import FormButton from "../../components/FormButton";
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import PropTypes from "prop-types";
+// import MapAutoComplete from "../../components/MapAutoComplete";
 
 const styles = theme => ({
   root: {
@@ -44,6 +45,7 @@ class Home extends Component {
 
   render() {
     const { classes } = this.props;
+    // const { autoCompleteService, geoCoderService } = this.state;
 
     return (
       <div className="Site">
@@ -68,6 +70,13 @@ class Home extends Component {
                 value={this.state.pointOfInterest}
                 handleChange={this.handleChange}
               />
+              {/* <MapAutoComplete
+                autoCompleteService={autoCompleteService}
+                geoCoderService={geoCoderService}
+                // americaLatLng={americaLatLng}
+                // markerName={name}
+                // addMarker={this.addMarker}
+              /> */}
             </FormContainer>
             <Tab />
             <div className="row">
