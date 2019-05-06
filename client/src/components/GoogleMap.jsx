@@ -6,6 +6,7 @@ import MediaCard from "../components/MediaCard";
 import placeHolder from "../placeholder.png";
 import Typography from "@material-ui/core/Typography";
 import Slider from "../components/Slider";
+import Modal from "../components/Modal";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -18,6 +19,8 @@ export class MapContainer extends React.Component {
       error: "",
       markers: [],
       cards: [],
+      currentCard: 0,
+      modal: false,
       params: querySearch(
         window.location.href.slice(window.location.href.indexOf("?"))
       )
@@ -26,7 +29,7 @@ export class MapContainer extends React.Component {
     this.Google = this.props.google;
     this.map = document.getElementsByClassName("map");
     this.geocoder = new this.Google.maps.Geocoder();
-    this.directions = new this.Google.maps.DirectionsService();
+    this.distance = new this.Google.maps.DistanceMatrixService();
   }
 
   styles = {
@@ -100,37 +103,80 @@ export class MapContainer extends React.Component {
       },
       (res, status) => {
         if (status === "OK") {
-          const newMarkers = [];
-          const newCards = [];
+          const data = [];
           for (var i = 0; i < res.length; i++) {
-            const data = res[i];
-            const marker = data.geometry.location;
-            newMarkers.push({ lat: marker.lat(), lng: marker.lng() });
-            newCards.push({
-              name: data.name,
-              rating: data.rating,
-              image: data.photos ? data.photos[0].getUrl() : placeHolder,
-              address: data.formatted_address
+            const marker = res[i].geometry.location;
+            data.push({
+              marker: { lat: marker.lat(), lng: marker.lng() },
+              name: res[i].name,
+              rating: res[i].rating,
+              image: res[i].photos ? res[i].photos[0].getUrl() : placeHolder,
+              address: res[i].formatted_address
             });
           }
-          this.setState({ markers: newMarkers, cards: newCards });
+          this.fetchDistance(data);
         } else this.setState({ error: "No Results Found" });
       }
     );
   };
 
-  fetchDirections = (address) => {
-    this.directions.route(
-      { origin: this.state.from, destination: address, travelMode: "" },
+  fetchDistance = data => {
+    const addresses = [];
+    data.forEach(d => addresses.push(d.address));
+    this.distance.getDistanceMatrix(
+      {
+        origins: [this.state.params.from, this.state.params.to],
+        destinations: addresses,
+        travelMode: this.state.params.mode,
+        unitSystem: this.Google.maps.UnitSystem.IMPERIAL
+      },
       res => {
-        console.log(res);
+        for(let i = 0; i < res.rows[0].elements.length; i++) {
+          data[i].distanceA = res.rows[0].elements[i].distance.text;
+          data[i].durationA = res.rows[0].elements[i].duration.text;
+        }
+
+        for(let i = 0; i < res.rows[1].elements.length; i++) {
+          data[i].distanceB = res.rows[1].elements[i].distance.text;
+          data[i].durationB = res.rows[1].elements[i].duration.text;
+        }
+        this.createCards(data)
       }
     );
+  };
+
+  createCards = data => {
+    const newMarkers = [];
+    const newCards = [];
+    data.forEach(d => {
+      newMarkers.push({ lat: d.marker.lat, lng: d.marker.lng });
+      newCards.push({
+        name: d.name,
+        rating: d.rating,
+        image: d.image,
+        address: d.address,
+        distanceA: d.distanceA,
+        distanceB: d.distanceB,
+        durationA: d.durationB,
+        durationB: d.durationB,
+      });
+    });
+    this.setState({ markers: newMarkers, cards: newCards });
+  };
+
+  handleModalOpen = id => {
+    this.setState({currentCard: id}, this.setState({ modal: true }))
+    ;
+  };
+
+  handleModalClose = () => {
+    this.setState({ modal: false });
   };
 
   render() {
     return (
       <>
+        <Modal open={this.state.modal} card={this.state.cards.length > 0 ? this.state.cards[this.state.currentCard] : {}} handleClose={this.handleModalClose}/>
         <Map
           google={this.Google}
           style={this.styles.map}
@@ -164,10 +210,12 @@ export class MapContainer extends React.Component {
                 return (
                   <MediaCard
                     key={index}
+                    listId={index}
                     name={card.name}
                     image={card.image}
                     rating={card.rating}
                     address={card.address}
+                    handleClick={this.handleModalOpen}
                   />
                 );
               })
