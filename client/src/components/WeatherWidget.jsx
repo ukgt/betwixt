@@ -32,7 +32,7 @@ function WeatherWidget(props) {
             <LeftArrow fontSize="large"/>
           </IconButton>
           </div>
-          <Button variant="outlined" color="primary" component={Link} to="/weather">Weather Placeholder</Button>
+          <Button variant="outlined" color="primary" component={Link} to="/weather">Check Weather</Button>
         </Toolbar>
       </AppBar>
     </div>
