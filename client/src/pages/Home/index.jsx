@@ -9,6 +9,7 @@ import FormButton from "../../components/FormButton";
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import PropTypes from "prop-types";
+// import MapAutoComplete from "../../components/MapAutoComplete";
 
 const styles = theme => ({
   root: {
@@ -113,6 +114,13 @@ class Home extends Component {
                 handleChange={this.handleChange}
                 error={this.state.error.pointOfInterest}
               />
+              {/* <MapAutoComplete
+                autoCompleteService={autoCompleteService}
+                geoCoderService={geoCoderService}
+                // americaLatLng={americaLatLng}
+                // markerName={name}
+                // addMarker={this.addMarker}
+              /> */}
             </FormContainer>
             <Tab onValueChanged={this.handleTransportation} />
             <div className="row">
