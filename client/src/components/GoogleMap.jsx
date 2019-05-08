@@ -16,7 +16,7 @@ export class MapContainer extends React.Component {
     super(props);
     this.state = {
       origins: { first: {}, second: {} },
-      center: { lat: 29.76328, lng: -95.36327 },
+      center: { lat: 33.7490, lng: 84.3880 },
       error: "",
       markers: [],
       cards: [],
@@ -39,13 +39,13 @@ export class MapContainer extends React.Component {
   styles = {
     map: {
       width: "100%",
-      height: "50%"
+      height: "50%",
+      position: "relative"
     },
     paper: {
-      marginTop: 400,
+      marginTop: 20,
       width: "90%",
       display: "flex",
-      justifyContent: "center",
       overflow: "scroll"
     },
     container: {
@@ -73,8 +73,6 @@ export class MapContainer extends React.Component {
   findMidPoint = (mapProps, map) => {
     const { google } = mapProps;
     const service = new google.maps.places.PlacesService(map);
-    let start = this.state.params.from;
-    let end = this.state.params.to;
     // var travelMode = google.maps.DirectionsTravelMode.DRIVING
     // console.log(start, end);
     this.geocoder.geocode(
@@ -166,9 +164,9 @@ export class MapContainer extends React.Component {
           data[i].durationA = res.rows[0].elements[i].duration.text;
         }
 
-        for(let i = 0; i < res.rows[1].elements.length; i++) {
-          data[i].distanceB = res.rows[1].elements[i].distance.text;
-          data[i].durationB = res.rows[1].elements[i].duration.text;
+        for(let e = 0; e < res.rows[1].elements.length; e++) {
+          data[e].distanceB = res.rows[1].elements[e].distance.text;
+          data[e].durationB = res.rows[1].elements[e].duration.text;
         }
         this.createCards(data)
       }
@@ -187,7 +185,7 @@ export class MapContainer extends React.Component {
         address: d.address,
         distanceA: d.distanceA,
         distanceB: d.distanceB,
-        durationA: d.durationB,
+        durationA: d.durationA,
         durationB: d.durationB,
       });
     });
@@ -263,8 +261,7 @@ export class MapContainer extends React.Component {
             strokeOpacity={0.8}
             strokeWeight={2}
           /> */}
-        </Map>
-        <div style={this.styles.container}>
+          <div style={this.styles.container}>
           <Paper elevation={5} style={this.styles.paper}>
             {/* <Slider>
               {this.state.cards.map((card, index) => {
@@ -300,6 +297,8 @@ export class MapContainer extends React.Component {
             )}
           </Paper>
         </div>
+        </Map>
+        
       </>
     );
   }
