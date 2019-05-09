@@ -16,7 +16,7 @@ export class MapContainer extends React.Component {
     super(props);
     this.state = {
       origins: { first: {}, second: {} },
-      center: { lat: 33.7490, lng: 84.3880 },
+      center: { lat: 33.7490, lng: -84.3880 },
       error: "",
       markers: [],
       cards: [],
