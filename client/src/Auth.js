@@ -8,11 +8,12 @@ class Auth {
       domain: "dev-1f5flisp.auth0.com",
       audience: "https://dev-1f5flisp.auth0.com/userinfo",
       clientID: "mZHUe42c4yE0R1nyFzcoMGss5PwoeESZ",
-      redirectUri: process.env.REACT_APP_AUTHENTICATION_REDIRECT ||
-        "https://betwixt-gt.herokuapp.com/callback",
+      redirectUri:
+        process.env.REACT_APP_AUTHENTICATION_REDIRECT ||
+        "http://between.s3-website-us-east-1.amazonaws.com/callback/",
       // redirectUri: process.env.REDIRECT_URL || "https://betwixt-gt.herokuapp.com/callback",
       responseType: "id_token",
-      scope: "openid profile"
+      scope: "openid profile",
     });
 
     this.getProfile = this.getProfile.bind(this);
@@ -71,7 +72,9 @@ class Auth {
 
   signOut() {
     this.auth0.logout({
-      returnTo: process.env.REACT_APP_AUTHENTICATION_REDIRECT || "https://betwixt-gt.herokuapp.com/",
+      returnTo:
+        process.env.REACT_APP_AUTHENTICATION_REDIRECT ||
+        "http://between.s3-website-us-east-1.amazonaws.com/",
       clientID: "mZHUe42c4yE0R1nyFzcoMGss5PwoeESZ",
     });
   }

@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/ukgt/betwixt#readme",
   "dependencies": {
+    "amazon-cognito-identity-js": "^3.0.12",
     "antd": "^3.16.3",
     "body-parser": "^1.18.3",
     "concurrently": "^4.1.0",

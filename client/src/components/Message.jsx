@@ -51,7 +51,7 @@ export default class Message extends React.Component {
         message: this.state.text
       }
       console.log('hey!!!', payload)
-      axios.post('/message', payload)
+      axios.post("https://betwixt-gt.herokuapp.com/message", payload);
     } else {
       this.setState({ text: e.target.value })
     }
