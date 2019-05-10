@@ -12,14 +12,14 @@ import Callback from "./Callback";
 import SecuredRoute from "./components/SecuredRoute/SecuredRoute";
 import NewQuestion from "./components/NewQuestion/NewQuestion";
 import auth0Client from "./Auth";
-import Message from './components/Message';
-import Weather from './components/Weather';
+import Message from "./components/Message";
+import Weather from "./components/Weather";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      checkingSession: false,
+      checkingSession: false
     };
   }
 
@@ -32,7 +32,7 @@ class App extends Component {
     }
   }
 
-render() {
+  render() {
     return (
       <Router>
         <div className="root">
@@ -47,11 +47,11 @@ render() {
               component={Message}
               checkingSession={this.state.checkingSession}
             />
-</div>
+          </div>
         </div>
       </Router>
     );
-  };
+  }
 }
 
 export default withRouter(App);
