@@ -7,6 +7,7 @@ import placeHolder from "../placeholder.png";
 import Typography from "@material-ui/core/Typography";
 import Slider from "../components/Slider";
 import Modal from "../components/Modal";
+import WeatherWidget from "../components/WeatherWidget"
 import midPointIcon from "../betwixt-symbol.png";
 import dotenv from "dotenv";
 dotenv.config();
@@ -22,6 +23,7 @@ export class MapContainer extends React.Component {
       cards: [],
       currentCard: 0,
       modal: false,
+      getWeather: false,
       params: querySearch(
         window.location.href.slice(window.location.href.indexOf("?"))
       ),
@@ -96,15 +98,18 @@ export class MapContainer extends React.Component {
                   secondLoc,
                   0.5
                 );
+                console.log(midPoint)
                 this.setState(
                   {
                     origins: {
                       from: fromRes[0].geometry.location,
                       to: toRes[0].geometry.location
                     },
-                    center: midPoint
+                    center: midPoint,
+                    getWeather: true,
                   },
                   () => {
+                    console.log("center" + this.state.center.lat())
                     this.fetchPlaces(service);
                   }
                 );
@@ -204,7 +209,8 @@ export class MapContainer extends React.Component {
   render() {
     return (
       <>
-        <Modal open={this.state.modal} card={this.state.cards.length > 0 ? this.state.cards[this.state.currentCard] : {}} handleClose={this.handleModalClose}/>
+      <WeatherWidget getWeather={this.state.getWeather} center={this.state.center}/>
+        <Modal open={this.state.modal} card={this.state.cards.length > 0 ? this.state.cards[this.state.currentCard] : {}} params={{first: this.state.params.from, second: this.state.params.to, mode: this.state.params.mode}} handleClose={this.handleModalClose}/>
         <Map
           google={this.Google}
           style={this.styles.map}
@@ -298,7 +304,6 @@ export class MapContainer extends React.Component {
           </Paper>
         </div>
         </Map>
-        
       </>
     );
   }

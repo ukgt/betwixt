@@ -23,8 +23,10 @@ const styles = theme => ({
 class SimpleModal extends React.Component {
 
   render() {
-    const { classes, card  } = this.props;
+    const { classes, card, params  } = this.props;
     const { name, rating, address, distanceA, distanceB, durationA, durationB } = card
+    const firstLoc = decodeURI(params.first);
+    const secondLoc = decodeURI(params.second);
 
     return (
       <div>
@@ -46,16 +48,19 @@ class SimpleModal extends React.Component {
               {"Rating: " + rating || "N/A"}
             </Typography>
             <Typography variant="subtitle1" id="modal-title">
-              {"Distance from First Location : " + distanceA || "N/A"}
+              {"Mode of transportation: " + params.mode || "N/A"}
             </Typography>
             <Typography variant="subtitle1" id="modal-title">
-              {"Time from First Location : " + durationA || "N/A"}
+              {`Distance from ${firstLoc}: ${distanceA}` || "N/A"}
             </Typography>
             <Typography variant="subtitle1" id="modal-title">
-              {"Distance from Second Location : " + distanceB || "N/A"}
+              {`Time from ${firstLoc}: ${durationA}` || "N/A"}
             </Typography>
             <Typography variant="subtitle1" id="modal-title">
-              {"Time from Second Location : " + durationB || "N/A"}
+              {`Distance from ${secondLoc}: ${distanceB}` || "N/A"}
+            </Typography>
+            <Typography variant="subtitle1" id="modal-title">
+              {`Time from ${secondLoc}: ${durationB}` || "N/A"}
             </Typography>
           </div>
         </Modal>

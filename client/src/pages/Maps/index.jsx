@@ -6,7 +6,6 @@ import WeatherWidget from "../../components/WeatherWidget";
 export default function Maps(props) {
   return (
     <div style={{ position: "static" }}>
-      <WeatherWidget />
       <Map />
     </div>
   );
