@@ -4,6 +4,7 @@ import PlacesAutocomplete, {
   getLatLng,
 } from "react-places-autocomplete";
 import { classnames } from "../helpers";
+import TextField from "@material-ui/core/TextField";
 
 class LocationSearchInput extends React.Component {
   constructor(props) {
@@ -80,51 +81,63 @@ class LocationSearchInput extends React.Component {
             return (
               <div className="Demo__search-bar-container">
                 <div className="Demo__search-input-container">
-                  <input
+                  <TextField
+                    fullWidth
+                    {...getInputProps({
+                      placeholder: "Placeholder",
+                      name: "locationB",
+                      className: "Demo__search-input",
+                    })}
+                  />
+                  {/* <input
                     {...getInputProps({
                       placeholder: "Search Places...",
                       className: "Demo__search-input",
                     })}
-                  />
-                  {this.state.address.length > 0 && (
+                  /> */}
+                  {/* {this.state.address.length > 0 && (
                     <button
                       className="Demo__clear-button"
                       onClick={this.handleCloseClick}
                     >
                       x
                     </button>
-                  )}
+                  )} */}
                 </div>
                 {suggestions.length > 0 && (
                   <div className="Demo__autocomplete-container">
                     {suggestions.map(suggestion => {
-                      const className = classnames("Demo__suggestion-item", {
-                        "Demo__suggestion-item--active": suggestion.active,
-                      });
+                      const className = classnames(
+                        "Demo__suggestion-item",
+                        {
+                          "Demo__suggestion-item--active":
+                            suggestion.active,
+                        }
+                      );
 
                       return (
                         /* eslint-disable react/jsx-key */
                         <div
-                          {...getSuggestionItemProps(suggestion, { className })}
+                          {...getSuggestionItemProps(suggestion, {
+                            className,
+                          })}
                         >
                           <strong>
-                            {suggestion.formattedSuggestion.mainText}
+                            {
+                              suggestion.formattedSuggestion
+                                .mainText
+                            }
                           </strong>{" "}
                           <small>
-                            {suggestion.formattedSuggestion.secondaryText}
+                            {
+                              suggestion.formattedSuggestion
+                                .secondaryText
+                            }
                           </small>
                         </div>
                       );
                       /* eslint-enable react/jsx-key */
                     })}
-                    <div className="Demo__dropdown-footer">
-                      <div>
-                        <img
-                          src={require("../images/powered_by_google_default.png")}
-                          className="Demo__dropdown-footer-image"
-                        />
-                      </div>
-                    </div>
                   </div>
                 )}
               </div>
@@ -135,7 +148,7 @@ class LocationSearchInput extends React.Component {
           <div className="Demo__error-message">{this.state.errorMessage}</div>
         )}
 
-        {((latitude && longitude) || isGeocoding) && (
+        {/* {((latitude && longitude) || isGeocoding) && (
           <div>
             <h3 className="Demo__geocode-result-header">Geocode result</h3>
             {isGeocoding ? (
@@ -155,7 +168,7 @@ class LocationSearchInput extends React.Component {
               </div>
             )}
           </div>
-        )}
+        )} */}
       </div>
     );
   }
