@@ -96,12 +96,14 @@ class Home extends Component {
         <Grid container justify={"center"} spacing={24}>
           <Grid item xs={9}>
             <FormContainer>
+              
               <LocationSearchInput
-                // placeholder={"First Location"}
-                // name={"locationA"}
-                // value={locationA}
-                // handleChange={this.handleChange}
-                // error={this.state.error.locationA}
+                <PlacesAutocomplete inputProps={inputProps} onChange={(address) => {this.handleAddressChange(address, 'address1')}} />
+              // placeholder={"First Location"}
+              // name={"locationA"}
+              // value={locationA}
+              // handleChange={this.handleChange}
+              // error={this.state.error.locationA}
               />
               <FormInput
                 placeholder={"First Location"}

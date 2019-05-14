@@ -15,6 +15,8 @@ class LocationSearchInput extends React.Component {
       latitude: null,
       longitude: null,
       isGeocoding: false,
+      address1: "",
+      address2: "",
     };
   }
 
@@ -27,30 +29,36 @@ class LocationSearchInput extends React.Component {
     });
   };
 
-  handleSelect = selected => {
-    this.setState({ isGeocoding: true, address: selected });
-    geocodeByAddress(selected)
-      .then(res => getLatLng(res[0]))
-      .then(({ lat, lng }) => {
-        this.setState({
-          latitude: lat,
-          longitude: lng,
-          isGeocoding: false,
-        });
-      })
-      .catch(error => {
-        this.setState({ isGeocoding: false });
-        console.log("error", error); // eslint-disable-line no-console
-      });
-  };
-
-  handleCloseClick = () => {
+  handleAddressChange = (address, stateName) => {
     this.setState({
-      address: "",
-      latitude: null,
-      longitude: null,
+      [stateName]: address,
     });
   };
+
+//   handleSelect = selected => {
+//     this.setState({ isGeocoding: true, address: selected });
+//     geocodeByAddress(selected)
+//       .then(res => getLatLng(res[0]))
+//       .then(({ lat, lng }) => {
+//         this.setState({
+//           latitude: lat,
+//           longitude: lng,
+//           isGeocoding: false,
+//         });
+//       })
+//       .catch(error => {
+//         this.setState({ isGeocoding: false });
+//         console.log("error", error); // eslint-disable-line no-console
+//       });
+//   };
+
+//   handleCloseClick = () => {
+//     this.setState({
+//       address: "",
+//       latitude: null,
+//       longitude: null,
+//     });
+//   };
 
   handleError = (status, clearSuggestions) => {
     console.log("Error from Google Maps API", status); // eslint-disable-line no-console
@@ -68,8 +76,13 @@ class LocationSearchInput extends React.Component {
       isGeocoding,
     } = this.state;
 
+   const inputProps = {
+   value: this.state.address,
+   placeholder: "Enter a location",
+ };
     return (
       <div>
+       
         <PlacesAutocomplete
           onChange={this.handleChange}
           value={address}
@@ -89,6 +102,10 @@ class LocationSearchInput extends React.Component {
                       className: "Demo__search-input",
                     })}
                   />
+                  <form onSubmit={this.handleFormSubmit}>
+                  
+                    <button type="submit">Find Midpoint</button>
+                  </form>
                   {/* <input
                     {...getInputProps({
                       placeholder: "Search Places...",
@@ -145,7 +162,9 @@ class LocationSearchInput extends React.Component {
           }}
         </PlacesAutocomplete>
         {errorMessage.length > 0 && (
-          <div className="Demo__error-message">{this.state.errorMessage}</div>
+          <div className="Demo__error-message">
+            {this.state.errorMessage}
+          </div>
         )}
 
         {/* {((latitude && longitude) || isGeocoding) && (
