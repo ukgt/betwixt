@@ -18,12 +18,12 @@ You will be directed to the next page which will contain a Google Map with marke
 * [HTML5](https://www.w3schools.com/html/default.asp) -Web page content markup
 * [CSS](https://www.w3schools.com/css/default.asp) -Markup layout design
 * [Javascript](https://www.w3schools.com/js/default.asp) -Dynamic behavior
-* [React] (https://reactjs.org/) Javascript library for user interface
+* [React](https://reactjs.org/) Javascript library for user interface
 * [Bootstrap](https://getbootstrap.com/) -Responsive Design
 * [jQuery](https://jquery.com/) -Javascript library
 * [Mongoose](https://www.mongodb.com) -NoSQL
-* [API]() - Public and Google APIs
-* [NPM] - (https://www.npmjs.com/)
+* [API]() Public and Google APIs
+* [NPM](https://www.npmjs.com/)
 
 ## Knowledge Contributors
 * [Esterling Accime](https://www.linkedin.com/in/esterling-accime-324a4181/)
