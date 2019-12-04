@@ -1,4 +1,4 @@
-# Betwixt
+# Betwixt (https://betwixt-gt.herokuapp.com/)
 
 Betwixt is an application that allows you find points of interest near the mid point of two locations.
 
